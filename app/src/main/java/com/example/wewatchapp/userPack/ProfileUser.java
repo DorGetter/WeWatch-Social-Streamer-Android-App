@@ -87,7 +87,7 @@ public class ProfileUser extends AppCompatActivity implements View.OnClickListen
             case R.id.FriendsButton:
                 break;
             case R.id.MoviesButton:
-//                startActivity(new Intent(this,VOD.class));
+                startActivity(new Intent(this,Vod.class));
                 break;
             case R.id.myActivityButton:
                 break;
