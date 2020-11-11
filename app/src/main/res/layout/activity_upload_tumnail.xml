@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".utilitiesPack.UploadThumnailActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:text="Choose Movies Type:"
+            android:layout_marginBottom="5dp"/>
+        <RadioGroup
+            android:id="@+id/radioSex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+            <RadioButton
+                android:id="@+id/radionnoselect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="No Type" />
+            <RadioButton
+                android:id="@+id/radiolatestmovies"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="latest movies"
+                />
+            <RadioButton
+                android:id="@+id/radiopopularmovies"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Best popular movies" />
+            <RadioButton
+                android:id="@+id/radioSlidermovies"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Slide movies" />
+
+        </RadioGroup>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:background="#ffff"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="showFileChooser"
+                android:textSize="16sp"
+                android:text="upload Thumnail"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:gravity="center"
+                android:text="no thumnail selected"
+                android:id="@+id/txtViewthumSelected"
+                />
+        </LinearLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonupload"
+            android:layout_marginTop="10dp"
+            android:text="UPLOAD"
+            android:onClick="uploadfileToFirebase"
+            android:textStyle="bold"
+            />
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:id="@+id/imageView"
+            ></ImageView>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "288977757829",
+    "firebase_url": "https://wewatch-dor.firebaseio.com",
+    "project_id": "wewatch-dor",
+    "storage_bucket": "wewatch-dor.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:288977757829:android:5cae17d9550bbc194fabec",
+        "android_client_info": {
+          "package_name": "com.example.signingup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "288977757829-34rd3asa1gc43seqlkrofe57gs0v3fuq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNnoOLnUWL-eRw5FUJ4SCqdQAZaeBgfRk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "288977757829-34rd3asa1gc43seqlkrofe57gs0v3fuq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:288977757829:android:c83933717b377a0f4fabec",
+        "android_client_info": {
+          "package_name": "com.example.wewatchapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "288977757829-34rd3asa1gc43seqlkrofe57gs0v3fuq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNnoOLnUWL-eRw5FUJ4SCqdQAZaeBgfRk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "288977757829-34rd3asa1gc43seqlkrofe57gs0v3fuq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:288977757829:android:3ae6aa1e43c4b2634fabec",
+        "android_client_info": {
+          "package_name": "com.home.movieappserverside"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "288977757829-34rd3asa1gc43seqlkrofe57gs0v3fuq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNnoOLnUWL-eRw5FUJ4SCqdQAZaeBgfRk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "288977757829-34rd3asa1gc43seqlkrofe57gs0v3fuq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
