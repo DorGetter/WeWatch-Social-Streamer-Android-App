@@ -1,10 +1,16 @@
 package com.example.wewatchapp.userPack;
 
+import android.app.ActivityOptions;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -16,9 +22,10 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.wewatchapp.Adapter.MoviesShowAdapter;
 import com.example.wewatchapp.Adapter.SliderPagerAdapterNew;
 import com.example.wewatchapp.Model.GetVideoDetails;
-import com.example.wewatchapp.Model.MoviesItemClickListenerNew;
+import com.example.wewatchapp.Model.MovieItemClickListenerNew;
 import com.example.wewatchapp.Model.SliderSide;
 import com.example.wewatchapp.R;
+import com.example.wewatchapp.utilitiesPack.MovieDetailNewActivity;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,16 +38,19 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Vod extends AppCompatActivity implements MoviesItemClickListenerNew {
+public class Vod extends AppCompatActivity implements MovieItemClickListenerNew {
 
     MoviesShowAdapter moviesShowAdapter;
-    DatabaseReference mDatabaseReference;
-    private List<GetVideoDetails> uploads,uploadlistLatest,uploadListPopular;
-    private List<GetVideoDetails> actionMovies,sportMovies,comedyMovies,romanticMovies,adventureMovies;
-    private ViewPager slidePager;
-    private List<SliderSide> uploadSlider;
-    private TabLayout indicator,tabMovieActions;
-    private RecyclerView moviesRv,moviesRvWeek,tab;
+    DatabaseReference mDatabaserefence ;
+    private List<GetVideoDetails> uploads, uploadsListlatest,uploadsListpopular;
+    private List<GetVideoDetails> actionmovies, sportmovies,comedymovies,romanticmovies,advanturemovies;
+
+    private ViewPager sliderpager;
+    private List<SliderSide> uploadsslider ;
+
+    private TabLayout indicator,tabActionMovies;
+    private RecyclerView MoviesRV ,moviesRvWeek ,tab;
+
     ProgressDialog progressDialog;
 
     @Override
@@ -52,136 +62,121 @@ public class Vod extends AppCompatActivity implements MoviesItemClickListenerNew
         getSupportActionBar().setCustomView(R.layout.actionbar);
 
         progressDialog = new ProgressDialog(this);
-
-        inViews();
+        iniViews();
         addAllMovies();
         iniPopularMovies();
+        // iniSlider();
         iniWeekMovies();
-        moviesViewTab();
-
-
+        movieviewtab();
+        // getActionMovies();
+        askPermission();
 
     }
 
 
-    /**
-     * addinf movies from dataBase
-     */
     private void addAllMovies(){
         uploads = new ArrayList<>();
-        uploadlistLatest = new ArrayList<>();
-        uploadListPopular = new ArrayList<>();
-        actionMovies = new ArrayList<>();
-        adventureMovies = new ArrayList<>();
-        comedyMovies = new ArrayList<>();
-        sportMovies = new ArrayList<>();
-        romanticMovies = new ArrayList<>();
-        uploadSlider = new ArrayList<>();
+        uploadsListlatest = new ArrayList<>();
+        uploadsListpopular = new ArrayList<>();
+        actionmovies = new ArrayList<>();
+        sportmovies = new ArrayList<>();
+        uploadsslider = new ArrayList<>();
+        advanturemovies = new ArrayList<>();
+        comedymovies = new ArrayList<>();
+        romanticmovies = new ArrayList<>();
 
-        mDatabaseReference = FirebaseDatabase.getInstance().getReference("videos");
-        progressDialog.setMessage("loading...");
+
+        mDatabaserefence = FirebaseDatabase.getInstance().getReference("videos");
+        progressDialog.setMessage("loading....");
         progressDialog.show();
 
-        mDatabaseReference.addValueEventListener(new ValueEventListener() {
+        mDatabaserefence.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot postSnapshot : dataSnapshot.getChildren()){
 
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     GetVideoDetails upload = postSnapshot.getValue(GetVideoDetails.class);
                     SliderSide slide = postSnapshot.getValue(SliderSide.class);
-
-                    //getting to the label
                     if(upload.getVideo_type().equals("latest movies")){
-                        uploadlistLatest.add(upload);
-                    }
-                    if(upload.getVideo_type().equals("Best popular movies")){
-                        uploadListPopular.add(upload);
-                    }
+                        uploadsListlatest.add(upload);
 
-                    if(upload.getVideo_type().equals("Slide movies")){
-                        uploadSlider.add(slide);
+                    }else if(upload.getVideo_type().equals("Best popular movies"))
+                    {
+                        uploadsListpopular.add(upload);
                     }
-
                     if(upload.getVideo_category().equals("Action")){
-                        actionMovies.add(upload);
+                        actionmovies.add(upload);
+                    }else if(upload.getVideo_category().equals("Sports")){
+                        sportmovies.add(upload);
+                    }if(upload.getVideo_category().equals("Adventure")){
+                        advanturemovies.add(upload);
+                    } else if(upload.getVideo_category().equals("Comedy")){
+                        comedymovies.add(upload);
+                    }
+                    if(upload.getVideo_category().equals("Romantic")){
+                        romanticmovies.add(upload);
                     }
 
-                    if(upload.getVideo_category().equals("adventure")){
-                        adventureMovies.add(upload);
-                    }
 
-                    if(upload.getVideo_category().equals("romantic")){
-                        romanticMovies.add(upload);
+                    if(upload.getVideo_slide().equals("Slide movies")){
+                        uploadsslider.add(slide);
                     }
-                    if(upload.getVideo_category().equals("sports")){
-                        sportMovies.add(upload);
-                    }
-
-                    //                    if(upload.getVideo_type().equals("No Type")){
-//                        .add(upload);
-//                    }
-
                     uploads.add(upload);
+
                 }
                 iniSlider();
                 progressDialog.dismiss();
+
             }
+
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
+                progressDialog.dismiss();
             }
         });
-    }
-
-
-    ///movies sliders  and tabs.
-    private void iniSlider() {
-        SliderPagerAdapterNew adapterNew = new SliderPagerAdapterNew(this,uploadSlider);
-        slidePager.setAdapter(adapterNew);
-
-        //setup timer:
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new SliderTimer(), 4000, 6000);
-        indicator.setupWithViewPager(slidePager,true);
 
     }
 
-    private void iniWeekMovies(){
-        moviesShowAdapter = new MoviesShowAdapter(this,uploadlistLatest,this);
+    private void iniWeekMovies() {
+
+        moviesShowAdapter = new MoviesShowAdapter(this, uploadsListlatest,this);
         moviesRvWeek.setAdapter(moviesShowAdapter);
         moviesRvWeek.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
         moviesShowAdapter.notifyDataSetChanged();
-    }
 
-    private void iniPopularMovies(){
-        moviesShowAdapter = new MoviesShowAdapter(this,uploadListPopular,this);
-        moviesRv.setAdapter(moviesShowAdapter);
-        moviesRv.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
+    }
+    private void iniPopularMovies() {
+        moviesShowAdapter = new MoviesShowAdapter(this, uploadsListpopular,this);
+        //adding adapter to recyclerview
+        MoviesRV.setAdapter(moviesShowAdapter);
+        MoviesRV.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
         moviesShowAdapter.notifyDataSetChanged();
+
+
     }
 
-
-
-    private void moviesViewTab(){
+    private void movieviewtab() {
         getActionMovies();
-        tabMovieActions.addTab(tabMovieActions.newTab().setText("action"));
-        tabMovieActions.addTab(tabMovieActions.newTab().setText("adventure"));
-        tabMovieActions.addTab(tabMovieActions.newTab().setText("comedy"));
-        tabMovieActions.addTab(tabMovieActions.newTab().setText("romance"));
-        tabMovieActions.addTab(tabMovieActions.newTab().setText("sports"));
-        tabMovieActions.setTabGravity(TabLayout.GRAVITY_FILL);
-        tabMovieActions.setTabTextColors(ColorStateList.valueOf(Color.WHITE));
+        tabActionMovies.addTab(tabActionMovies.newTab().setText("Action"));
+        tabActionMovies.addTab(tabActionMovies.newTab().setText("Advanture"));
+        tabActionMovies.addTab(tabActionMovies.newTab().setText("Comedy"));
+        tabActionMovies.addTab(tabActionMovies.newTab().setText("Romantic"));
+        tabActionMovies.addTab(tabActionMovies.newTab().setText("Sports"));
+        tabActionMovies.setTabGravity(TabLayout.GRAVITY_FILL);
+        tabActionMovies.setTabTextColors(ColorStateList.valueOf(Color.WHITE));
 
-        tabMovieActions.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        tabActionMovies.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                switch(tab.getPosition()){
+
+                switch (tab.getPosition()) {
                     case 0:
                         getActionMovies();
                         break;
                     case 1:
-                        getAdventureMovies();
+                        getAdvantureMovies();
                         break;
                     case 2:
                         getComedyMovies();
@@ -193,6 +188,7 @@ public class Vod extends AppCompatActivity implements MoviesItemClickListenerNew
                         getSportMovies();
                         break;
                 }
+
             }
 
             @Override
@@ -206,74 +202,134 @@ public class Vod extends AppCompatActivity implements MoviesItemClickListenerNew
             }
         });
 
+
+
+
     }
 
-    private void inViews(){
-        tabMovieActions = findViewById(R.id.tabActionMovies);
-        slidePager = findViewById(R.id.slider_page); // check if not work
+    private void iniSlider() {
+        //uploadsslider = new ArrayList<>();
+        SliderPagerAdapterNew adapterslider = new SliderPagerAdapterNew(this,uploadsslider);
+        sliderpager.setAdapter(adapterslider);
+        adapterslider.notifyDataSetChanged();
+        // setup timer
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new SliderTimer(),4000,6000);
+        indicator.setupWithViewPager(sliderpager,true);
+
+    }
+
+
+
+    private void iniViews() {
+        tabActionMovies = findViewById(R.id.tabActionMovies);
+        sliderpager = findViewById(R.id.slider_pager) ;
         indicator = findViewById(R.id.indicator);
+        MoviesRV = findViewById(R.id.Rv_movies);
         moviesRvWeek = findViewById(R.id.rv_movies_week);
-        moviesRv = findViewById(R.id.Rv_movies);
-        tab = findViewById(R.id.tabrecycler);
+        tab = findViewById(R.id.tabrecyler);
+
 
     }
+
 
     @Override
-    public void onMovieClick(GetVideoDetails getVideoDetails, ImageView imageView) {
+    public void onMovieClick(GetVideoDetails movie, ImageView movieImageView) {
 
+        Intent intent = new Intent(this, MovieDetailNewActivity.class);
+        // send movie information to deatilActivity
+        intent.putExtra("title",movie.getVideo_name());
+        intent.putExtra("imgURL",movie.getVideo_thumb());
+        intent.putExtra("imgCover",movie.getVideo_thumb());
+        intent.putExtra("movieDetails",movie.getVideo_description());
+        intent.putExtra("movieUrl",movie.getVideo_url());
+        intent.putExtra("movieCategory",movie.getVideo_category());
+
+        ActivityOptions options = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            options = ActivityOptions.makeSceneTransitionAnimation(Vod.this,
+                    movieImageView,"sharedName");
+        }
+
+        startActivity(intent,options.toBundle());
     }
 
-    /**
-     * Slider moving video timer inner class
-     */
     public class SliderTimer extends TimerTask {
-        public void run(){
+
+
+        @Override
+        public void run() {
 
             Vod.this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    if(slidePager.getCurrentItem()<uploadSlider.size()-1){
-                        slidePager.setCurrentItem(slidePager.getCurrentItem()+1);
-                    }else{                        slidePager.setCurrentItem(0); }
+                    if (sliderpager.getCurrentItem()<uploadsslider.size()-1) {
+                        sliderpager.setCurrentItem(sliderpager.getCurrentItem()+1);
+                    }
+                    else
+                        sliderpager.setCurrentItem(0);
                 }
             });
+
+
         }
     }
 
+
+
     private void getActionMovies(){
-        moviesShowAdapter = new MoviesShowAdapter(this,actionMovies,this);
+        moviesShowAdapter = new MoviesShowAdapter(this, actionmovies,this);
+        //adding adapter to recyclerview
         tab.setAdapter(moviesShowAdapter);
         tab.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
         moviesShowAdapter.notifyDataSetChanged();
+        Toast.makeText(Vod.this, "Tab Action Seleted:", Toast.LENGTH_SHORT).show();
     }
 
     private void getSportMovies(){
-        moviesShowAdapter = new MoviesShowAdapter(this,sportMovies,this);
+        moviesShowAdapter = new MoviesShowAdapter(this, sportmovies,this);
+        //adding adapter to recyclerview
         tab.setAdapter(moviesShowAdapter);
         tab.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
         moviesShowAdapter.notifyDataSetChanged();
+
+    }
+
+    private void getAdvantureMovies(){
+        moviesShowAdapter = new MoviesShowAdapter(this, advanturemovies,this);
+        //adding adapter to recyclerview
+        tab.setAdapter(moviesShowAdapter);
+        tab.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
+        moviesShowAdapter.notifyDataSetChanged();
+
     }
 
     private void getRomanticMovies(){
-        moviesShowAdapter = new MoviesShowAdapter(this,romanticMovies,this);
+        moviesShowAdapter = new MoviesShowAdapter(this, romanticmovies,this);
+        //adding adapter to recyclerview
         tab.setAdapter(moviesShowAdapter);
         tab.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
         moviesShowAdapter.notifyDataSetChanged();
+
     }
 
     private void getComedyMovies(){
-        moviesShowAdapter = new MoviesShowAdapter(this,comedyMovies,this);
+        moviesShowAdapter = new MoviesShowAdapter(this, comedymovies,this);
+        //adding adapter to recyclerview
         tab.setAdapter(moviesShowAdapter);
         tab.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
         moviesShowAdapter.notifyDataSetChanged();
+
     }
 
-    private void getAdventureMovies(){
-        moviesShowAdapter = new MoviesShowAdapter(this,adventureMovies,this);
-        tab.setAdapter(moviesShowAdapter);
-        tab.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
-        moviesShowAdapter.notifyDataSetChanged();
-    }
 
+    public void askPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(this)) {
+            Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                    Uri.parse("package:" + getPackageName()));
+            startActivityForResult(intent, 2004);
+
+        }
+    }
 
 }

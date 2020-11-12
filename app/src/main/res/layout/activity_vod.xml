@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView
-
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,124 +7,113 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
     tools:context=".userPack.Vod">
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <androidx.viewpager.widget.ViewPager
-            android:id="@+id/slider_page"
+            android:id="@+id/slider_pager"
             android:layout_width="0dp"
             android:layout_height="275dp"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
-        </androidx.viewpager.widget.ViewPager>
-
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
         <com.google.android.material.tabs.TabLayout
+            android:id="@+id/indicator"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/indicator"
-            app:tabGravity="center"
-            app:tabIndicatorHeight="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/slider_pager"
             app:tabBackground="@drawable/indicator_selector"
-            android:background="@color/colorPrimaryDark"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="@+id/slider_page"
-            ></com.google.android.material.tabs.TabLayout>
-
+            app:tabGravity="center"
+            app:tabIndicatorHeight="0dp">
+        </com.google.android.material.tabs.TabLayout>
         <TextView
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:textAllCaps="true"
-            app:layout_constraintTop_toBottomOf="@+id/indicator"
-            android:text="Best Popular Films And Movies"
-            android:textColor="@color/text_light_blue"
-            app:layout_constraintHorizontal_bias="0.0"
-            android:id="@+id/text_view"
-            >
-        </TextView>
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:text="Best Popular Films and movies"
+            android:textAllCaps="true"
+            android:textColor="@color/text_light_blue"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintTop_toBottomOf="@+id/text_view"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/indicator" />
+
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/Rv_movies"
-            >
-        </androidx.recyclerview.widget.RecyclerView>
-
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 
         <TextView
+            android:id="@+id/txt_week_movies"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="Popular This Week"
             android:textAllCaps="true"
-            app:layout_constraintTop_toBottomOf="@+id/Rv_movies"
-            android:text="Popular this week"
             android:textColor="@color/text_light_blue"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            android:id="@+id/text_view_week"
-            >
-        </TextView>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Rv_movies"
+            app:layout_constraintVertical_bias="0.0" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_movies_week"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintTop_toBottomOf="@+id/text_view_week"
-            android:id="@+id/rv_movies_week"
-            >
-        </androidx.recyclerview.widget.RecyclerView>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_week_movies" />
+
+
         <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabActionMovies"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:tabMode="scrollable"
-            app:layout_constraintTop_toBottomOf="@+id/rv_movies_week"
             android:background="@color/text_bg_blue"
-            android:id="@+id/tabActionMovies"
-            >
-        </com.google.android.material.tabs.TabLayout>
+            app:layout_constraintTop_toBottomOf="@+id/rv_movies_week"
+            />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:id="@+id/tabrecyler"
             android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="8dp"
             android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/tabActionMovies"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintTop_toBottomOf="@+id/tabActionMovies"
-            android:id="@+id/tabrecycler"
-            >
-        </androidx.recyclerview.widget.RecyclerView>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tabActionMovies" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
