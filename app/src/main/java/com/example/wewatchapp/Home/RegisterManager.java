@@ -25,7 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class RegisterManager extends AppCompatActivity implements View.OnClickListener {
 
 
-    private ImageView banner;
+    private ImageView banner; // we watch logo.
     private TextView registerManager;
     private EditText editTextFullName, editTextAge, editTextEmail, editTextPassword;
     private FirebaseAuth mAuth;
