@@ -32,8 +32,6 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 
-import org.apache.commons.io.FilenameUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -172,6 +170,7 @@ public class UploadMovie extends AppCompatActivity implements AdapterView.OnItem
 
             videoUri = data.getData();
             String fileNames = getFileName(videoUri);
+
             textViewImage.setText(fileNames);
             String absolutepathThum = null;
             Cursor cursor;
@@ -179,14 +178,16 @@ public class UploadMovie extends AppCompatActivity implements AdapterView.OnItem
             String[] projection = {MediaStore.MediaColumns.DATA,
                     MediaStore.Video.Media.BUCKET_DISPLAY_NAME, MediaStore.Video.Media._ID
                     , MediaStore.Video.Thumbnails.DATA};
+            for(String s : projection){
+                System.out.println(s.toString()+"\n");
+            }
             final String orderby = MediaStore.Video.Media.DEFAULT_SORT_ORDER;
             cursor = UploadMovie.this.getContentResolver().query(videoUri, projection,
                     null,null,orderby);
             coloum_index_data = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
             while (cursor.moveToNext()) {
                 absolutepathThum = cursor.getString(coloum_index_data);
-                video_title = FilenameUtils.getBaseName(absolutepathThum);
-
+                video_title = fileNames;
             }
         }
 
