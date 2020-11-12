@@ -77,7 +77,7 @@ public class UploadMovie extends AppCompatActivity implements AdapterView.OnItem
                 categories);
         // Drop down layout style - list view with radio button
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // attaching data adapter to spinner
+        // attaching data adapter to spinnerF
         spinner.setAdapter(dataAdapter);
     }
     @Override
