@@ -185,10 +185,16 @@ public class UploadMovie extends AppCompatActivity implements AdapterView.OnItem
             cursor = UploadMovie.this.getContentResolver().query(videoUri, projection,
                     null,null,orderby);
             coloum_index_data = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
-            while (cursor.moveToNext()) {
-                absolutepathThum = cursor.getString(coloum_index_data);
-                video_title = fileNames;
+
+            int iend = fileNames.indexOf("."); //this finds the first occurrence of "."
+            String subString;
+            if (iend != -1){
+                video_title= fileNames.substring(0 , iend); //this will give abc
             }
+//            while (cursor.moveToNext()) {
+//                absolutepathThum = cursor.getString(coloum_index_data);
+//                video_title = fileNames;
+//            }
         }
 
 
