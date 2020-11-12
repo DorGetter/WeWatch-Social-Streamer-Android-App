@@ -28,7 +28,6 @@
         android:id="@+id/bg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:src="@drawable/ic_launcher_background"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="@+id/item_movies_img"
         app:srcCompat="@drawable/gradient_bg"

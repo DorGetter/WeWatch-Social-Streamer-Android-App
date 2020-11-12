@@ -44,7 +44,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:textAllCaps="true"
-            app:layout_constraintBottom_toBottomOf="@+id/indicator"
+            app:layout_constraintTop_toBottomOf="@+id/indicator"
             android:text="Best Popular Films And Movies"
             android:textColor="@color/text_light_blue"
             app:layout_constraintHorizontal_bias="0.0"
