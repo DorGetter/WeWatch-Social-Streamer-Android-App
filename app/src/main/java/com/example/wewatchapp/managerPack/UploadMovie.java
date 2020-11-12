@@ -137,8 +137,8 @@ public class UploadMovie extends AppCompatActivity implements AdapterView.OnItem
                         @Override
                         public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
 
-                            double progess = (100.0 * taskSnapshot.getBytesTransferred()/ taskSnapshot.getTotalByteCount());
-                            progressDialog.setMessage("Uploaded " + ((int) progess) + "%...");
+                            double progress = (100.0 * taskSnapshot.getBytesTransferred()/ taskSnapshot.getTotalByteCount());
+                            progressDialog.setMessage("Uploaded " + ((int) progress) + "%...");
 
                         }
                     });
