@@ -6,6 +6,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,7 +29,7 @@ public class RegisterManager extends AppCompatActivity implements View.OnClickLi
     private TextView registerManager;
     private EditText editTextFullName, editTextAge, editTextEmail, editTextPassword;
     private FirebaseAuth mAuth;
-
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
