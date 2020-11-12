@@ -1,15 +1,16 @@
 package com.example.wewatchapp.Model;
 
-public class GetVideoDetails {
-    public String   video_slide, video_type, video_thum,
-                    video_url , video_name, video_description , video_category;
+import java.io.Serializable;
 
-    public GetVideoDetails(String video_slide, String video_type,
-                           String video_thum, String video_url, String video_name,
-                           String video_description, String video_category) {
+public class GetVideoDetails implements Serializable {
+    public String video_slide, video_type,video_thumb, video_url,video_name
+            , video_description,video_category;
+
+    public GetVideoDetails(String video_slide, String video_type, String video_thumb, String video_url,
+                           String video_name, String video_description, String video_category) {
         this.video_slide = video_slide;
         this.video_type = video_type;
-        this.video_thum = video_thum;
+        this.video_thumb = video_thumb;
         this.video_url = video_url;
         this.video_name = video_name;
         this.video_description = video_description;
@@ -35,12 +36,12 @@ public class GetVideoDetails {
         this.video_type = video_type;
     }
 
-    public String getVideo_thum() {
-        return video_thum;
+    public String getVideo_thumb() {
+        return video_thumb;
     }
 
-    public void setVideo_thum(String video_thum) {
-        this.video_thum = video_thum;
+    public void setVideo_thumb(String video_thumb) {
+        this.video_thumb = video_thumb;
     }
 
     public String getVideo_url() {
@@ -75,4 +76,3 @@ public class GetVideoDetails {
         this.video_category = video_category;
     }
 }
-

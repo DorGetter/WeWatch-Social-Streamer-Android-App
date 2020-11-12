@@ -18,6 +18,7 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -44,6 +45,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:20.0.0'
     implementation 'androidx.navigation:navigation-fragment:2.3.1'
     implementation 'androidx.navigation:navigation-ui:2.3.1'
+    implementation 'androidx.media2:media2-exoplayer:1.0.3'
     testImplementation 'junit:junit:4.+'
     implementation 'commons-io:commons-io:2.6'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
@@ -51,4 +53,6 @@ dependencies {
     // glide library
     implementation 'com.github.bumptech.glide:glide:4.6.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
+    implementation 'com.google.android.exoplayer:exoplayer:2.9.6'
+
 }

@@ -38,7 +38,7 @@ public class SliderPagerAdapterNew extends PagerAdapter {
         TextView slidetitle = slideLayout.findViewById(R.id.slide_title);
 
         FloatingActionButton floatingActionButton = slideLayout.findViewById(R.id.floatingActionButton);
-        Glide.with(mContext).load(mList.get(position).getVideo_thum()).into(slideimage);
+        Glide.with(mContext).load(mList.get(position).getVideo_thumb()).into(slideimage);
 
         slidetitle.setText(mList.get(position).getVideo_name()+"\n"+mList.get(position).getVideo_description());
 

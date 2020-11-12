@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="40dp"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
-    android:background="@color/colorPrimaryDark"
     android:layout_gravity="center"
-    >
-
+    android:layout_width="match_parent"
+    android:background="@color/colorPrimaryDark"
+    android:layout_height="40dp">
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:text="Discover"
-        android:textColor="#ffffff"
-        android:textAlignment="center"
         style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
-        android:layout_gravity="center">
-
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_gravity="center"
+        android:textColor="#ffffff">
     </TextView>
+
 
 </LinearLayout>
