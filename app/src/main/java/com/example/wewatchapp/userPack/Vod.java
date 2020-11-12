@@ -15,6 +15,7 @@ import com.example.wewatchapp.Model.SliderSide;
 import com.example.wewatchapp.R;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +52,8 @@ public class Vod extends AppCompatActivity {
         romanticMovies = new ArrayList<>();
         uploadSlider = new ArrayList<>();
 
-
+        mDatabaseReference = FirebaseDatabase.getInstance().getReference("videos");
+        progressDialog.setMessage("loading...");
     }
 
 
