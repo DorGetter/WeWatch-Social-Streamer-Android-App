@@ -28,7 +28,7 @@ public class ProfileUser extends AppCompatActivity implements View.OnClickListen
     private DatabaseReference reference
             = FirebaseDatabase.getInstance().getReference("Users");;
 
-    Button moviesLibButton,feedButton,FriendsButton,myActivityButton,logOut;
+    Button moviesLibButton,feedButton,FriendsButton,myActivityButton,logOut,sendRequest;
 
 
     @Override
@@ -40,13 +40,16 @@ public class ProfileUser extends AppCompatActivity implements View.OnClickListen
         user                            = FirebaseAuth.getInstance().getCurrentUser();
         final TextView greetingTextView = (TextView) findViewById(R.id.greeting);
 
-
+        sendRequest = (Button) findViewById(R.id.SendRequests);
 
         feedButton          = (Button) findViewById(R.id.FeedButton)        ;
         myActivityButton    = (Button) findViewById(R.id.myActivityButton)  ;
         moviesLibButton     = (Button) findViewById(R.id.MoviesButton)      ;
         FriendsButton       = (Button) findViewById(R.id.FriendsButton)     ;
         logOut              = (Button) findViewById(R.id.signOut)           ;
+
+
+        sendRequest.setOnClickListener(this);
 
         feedButton          .setOnClickListener(this);
         myActivityButton    .setOnClickListener(this);
@@ -90,6 +93,9 @@ public class ProfileUser extends AppCompatActivity implements View.OnClickListen
                 startActivity(new Intent(this,Vod.class));
                 break;
             case R.id.myActivityButton:
+                break;
+            case R.id.SendRequests:
+                startActivity(new Intent(this, RequestForm.class));
                 break;
             case R.id.signOut:
                 startActivity(new Intent( this, MainActivity.class));

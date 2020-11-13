@@ -120,6 +120,23 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
+        android:id="@+id/SendRequests"
+        android:layout_width="144dp"
+        android:layout_height="99dp"
+        android:layout_marginEnd="20dp"
+        android:backgroundTint="#CBE6F7"
+        android:text="Send Request"
+        android:textColor="#196AAD"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.538"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.832" />
+
+    <Button
         android:id="@+id/FriendsButton"
         android:layout_width="144dp"
         android:layout_height="99dp"
