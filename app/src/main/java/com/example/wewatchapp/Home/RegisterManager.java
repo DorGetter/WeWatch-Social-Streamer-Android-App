@@ -31,6 +31,8 @@ public class RegisterManager extends AppCompatActivity implements View.OnClickLi
     private FirebaseAuth mAuth;
     ProgressBar progressBar;
 
+    // comment
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
