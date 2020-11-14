@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WeWatchApp">
-        <activity android:name=".userPack.RequestForm"></activity>
+        <activity android:name=".managerPack.OpenRequests"></activity>
+        <activity android:name=".userPack.RequestForm" />
         <activity android:name=".utilitiesPack.VideoplayActivity" />
         <activity android:name=".utilitiesPack.MovieDetailNewActivity" />
         <activity android:name=".userPack.Vod" />

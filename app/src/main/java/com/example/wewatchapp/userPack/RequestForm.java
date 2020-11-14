@@ -25,6 +25,7 @@ public class RequestForm extends AppCompatActivity implements View.OnClickListen
 
 
     private TextView sendRequest;
+    private TextView back;
     private EditText movieCategory, movieName, yourName ;
 
     /* firebase object */
@@ -40,6 +41,9 @@ public class RequestForm extends AppCompatActivity implements View.OnClickListen
         sendRequest = findViewById(R.id.sendRequest);
         sendRequest.setOnClickListener(this);
 
+        back = findViewById(R.id.back);
+        back.setOnClickListener(this);
+
         movieCategory = (EditText) findViewById(R.id.movieCategory);
         movieName = (EditText) findViewById(R.id.movieName);
         yourName = (EditText) findViewById(R.id.yourName);
@@ -53,8 +57,8 @@ public class RequestForm extends AppCompatActivity implements View.OnClickListen
     public void onClick(View view) {
 
         switch(view.getId()){
-            case R.id.banner:
-                startActivity(new Intent(this, MainActivity.class));
+            case R.id.back:
+                startActivity(new Intent(this, ProfileUser.class));
                 break;
 
             case R.id.sendRequest:

@@ -80,7 +80,7 @@ public class ProfileManager extends AppCompatActivity implements View.OnClickLis
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.OpenRequestsButton:
-                //directing to OpenRequests layout
+                startActivity(new Intent(this, OpenRequests.class));
                 break;
             case R.id.closedRequestsButton:
                 //directing to closedRequests layout
