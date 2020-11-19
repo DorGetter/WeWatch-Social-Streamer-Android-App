@@ -53,5 +53,13 @@ public class Request {
         this.requestID = requestID;
     }
 
-
+    @Override
+    public String toString() {
+        return "Request{" +
+                "category='" + category + '\'' +
+                ", movieName='" + movieName + '\'' +
+                ", userName='" + userName + '\'' +
+                ", requestID='" + requestID + '\'' +
+                '}';
+    }
 }

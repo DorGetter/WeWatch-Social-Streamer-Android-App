@@ -1,21 +1,14 @@
 package com.example.wewatchapp.managerPack;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.wewatchapp.R;
-import com.example.wewatchapp.userPack.ProfileUser;
-import com.example.wewatchapp.userPack.Request;
-import com.example.wewatchapp.userPack.User;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -44,43 +37,23 @@ public class OpenRequests extends AppCompatActivity implements View.OnClickListe
         database = FirebaseDatabase.getInstance();
         rootRef = database.getReference();
 
+
         /* shows new requests from the database */
         final TextView requestTextView = (TextView) findViewById(R.id.textNewRequest);
 
         /* check if there is new requests on the database */
-        rootRef.child("Requests").addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+        rootRef.child("Requests").addListenerForSingleValueEvent(new ValueEventListener() {
 
-                Request request = snapshot.getValue(Request.class);
+                      public void onDataChange(@NonNull DataSnapshot snapshot) {
+                          for (DataSnapshot child : snapshot.getChildren()) {
+                              System.out.println(child.toString());
+                          }
 
-                if(request != null){
-                    String requestSender = request.getUserName();
-                    requestTextView.setText("new request from: "+ requestSender);
-                }
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(OpenRequests.this,"Error!",Toast.LENGTH_LONG);
-            }
+                      }
+                      @Override
+                      public void onCancelled(@NonNull DatabaseError error) {
+                      }
         });
-
 
     }
 
