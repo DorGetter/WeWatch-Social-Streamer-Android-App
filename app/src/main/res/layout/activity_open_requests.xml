@@ -54,19 +54,20 @@
         app:layout_constraintVertical_bias="0.072" />
 
     <TextView
-        android:id="@+id/textNewRequest"
-        android:layout_width="317dp"
-        android:layout_height="63dp"
+        android:id="@+id/textNewRequest1"
+        android:layout_width="381dp"
+        android:layout_height="459dp"
         android:fontFamily="sans-serif-black"
-        android:text="Requests:"
+        android:text="Requests 1 :"
         android:textColor="#196AAD"
-        android:textSize="24dp"
+        android:textSize="18dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/banner"
-        app:layout_constraintVertical_bias="0.288" />
+        app:layout_constraintVertical_bias="0.553" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
