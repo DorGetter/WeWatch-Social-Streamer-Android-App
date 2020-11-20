@@ -42,14 +42,24 @@ public class OpenRequests extends AppCompatActivity implements View.OnClickListe
 
         /* shows new requests from the database */
         final TextView requestTextView = (TextView) findViewById(R.id.textNewRequest1);
+        final TextView requestTextView2 = (TextView) findViewById(R.id.textNewRequest2);
+        final TextView requestTextView3 = (TextView) findViewById(R.id.textNewRequest3);
+        final TextView requestTextView4 = (TextView) findViewById(R.id.textNewRequest4);
+        final TextView requestTextView5 = (TextView) findViewById(R.id.textNewRequest5);
+        final TextView requestTextView6 = (TextView) findViewById(R.id.textNewRequest6);
 
-        /* check if there is new requests on the database */
+        /* database requests listener */
         rootRef.child("Requests").addListenerForSingleValueEvent(new ValueEventListener() {
 
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
+                /* use for debug */
                 String requestList = "";
+
+                /* to show each request by name in different text view */
                 String requestLine = "new request from: ";
+                /* use for switch case to insert each request to correct number of text view */
+                int text_view_num = 1;
 
                 for (DataSnapshot child : snapshot.getChildren()) {
 
@@ -58,7 +68,32 @@ public class OpenRequests extends AppCompatActivity implements View.OnClickListe
                     Request request = child.getValue(Request.class);
                     String name = request.getUserName();
                     requestList = requestList + "\n" + requestLine + name;
-                    requestTextView.setText(requestList);
+
+
+                    switch(text_view_num){
+                        case 1:
+                            requestTextView.setText(requestLine + name + " Click Here");
+                            break;
+                        case 2:
+                            requestTextView2.setText(requestLine + name + " Click Here");
+                            break;
+                        case 3:
+                            requestTextView3.setText(requestLine + name + " Click Here");
+                            break;
+                        case 4:
+                            requestTextView4.setText(requestLine + name + " Click Here");
+                            break;
+                        case 5:
+                            requestTextView5.setText(requestLine + name + " Click Here");
+                            break;
+                        case 6:
+                            requestTextView6.setText(requestLine + name + " Click Here");
+                            break;
+                    }
+
+                    text_view_num ++;
+
+                    //requestTextView.setText(requestList);
 
 
                 }

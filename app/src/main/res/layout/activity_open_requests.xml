@@ -55,8 +55,8 @@
 
     <TextView
         android:id="@+id/textNewRequest1"
-        android:layout_width="381dp"
-        android:layout_height="459dp"
+        android:layout_width="378dp"
+        android:layout_height="43dp"
         android:fontFamily="sans-serif-black"
         android:text="Requests 1 :"
         android:textColor="#196AAD"
@@ -64,10 +64,90 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.533"
+        app:layout_constraintHorizontal_bias="0.484"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/banner"
-        app:layout_constraintVertical_bias="0.553" />
+        app:layout_constraintVertical_bias="0.206" />
+
+    <TextView
+        android:id="@+id/textNewRequest2"
+        android:layout_width="378dp"
+        android:layout_height="43dp"
+        android:fontFamily="sans-serif-black"
+        android:text="Requests 2 :"
+        android:textColor="#196AAD"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/banner"
+        app:layout_constraintVertical_bias="0.289" />
+
+    <TextView
+        android:id="@+id/textNewRequest3"
+        android:layout_width="378dp"
+        android:layout_height="43dp"
+        android:fontFamily="sans-serif-black"
+        android:text="Requests 3 :"
+        android:textColor="#196AAD"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/banner"
+        app:layout_constraintVertical_bias="0.373" />
+
+    <TextView
+        android:id="@+id/textNewRequest4"
+        android:layout_width="378dp"
+        android:layout_height="43dp"
+        android:fontFamily="sans-serif-black"
+        android:text="Requests 4 :"
+        android:textColor="#196AAD"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/banner"
+        app:layout_constraintVertical_bias="0.453" />
+
+    <TextView
+        android:id="@+id/textNewRequest5"
+        android:layout_width="378dp"
+        android:layout_height="43dp"
+        android:fontFamily="sans-serif-black"
+        android:text="Requests 5 :"
+        android:textColor="#196AAD"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/banner"
+        app:layout_constraintVertical_bias="0.542" />
+
+    <TextView
+        android:id="@+id/textNewRequest6"
+        android:layout_width="378dp"
+        android:layout_height="43dp"
+        android:fontFamily="sans-serif-black"
+        android:text="Requests 6 :"
+        android:textColor="#196AAD"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/banner"
+        app:layout_constraintVertical_bias="0.627" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
