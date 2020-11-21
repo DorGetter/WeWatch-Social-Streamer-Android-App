@@ -26,7 +26,8 @@ public class RequestForm extends AppCompatActivity implements View.OnClickListen
 
     private TextView sendRequest;
     private TextView back;
-    private EditText movieCategory, movieName, yourName ;
+    private TextView action, comedy, drama, adventures;
+    private EditText movieName, yourName ;
 
     /* firebase object */
     FirebaseDatabase database;
@@ -44,7 +45,18 @@ public class RequestForm extends AppCompatActivity implements View.OnClickListen
         back = findViewById(R.id.back);
         back.setOnClickListener(this);
 
-        movieCategory = (EditText) findViewById(R.id.movieCategory);
+        action = findViewById(R.id.action);
+        action.setOnClickListener(this);
+
+        comedy = findViewById(R.id.comedy);
+        comedy.setOnClickListener(this);
+
+        drama = findViewById(R.id.drama);
+        drama.setOnClickListener(this);
+
+        adventures = findViewById(R.id.adventures);
+        adventures.setOnClickListener(this);
+
         movieName = (EditText) findViewById(R.id.movieName);
         yourName = (EditText) findViewById(R.id.yourName);
 
@@ -52,6 +64,8 @@ public class RequestForm extends AppCompatActivity implements View.OnClickListen
         database = FirebaseDatabase.getInstance();
         rootRef = database.getReference("Requests");
     }
+
+    String movieCategory;
 
     @Override
     public void onClick(View view) {
@@ -65,6 +79,25 @@ public class RequestForm extends AppCompatActivity implements View.OnClickListen
                 sendMovieRequest();
                 break;
 
+            case R.id.action:
+                movieCategory = "ACTION";
+                Toast.makeText(this, "ACTION selected", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.comedy:
+                movieCategory = "COMEDY";
+                Toast.makeText(this, "COMEDY selected", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.drama:
+                movieCategory = "DRAMA";
+                Toast.makeText(this, "DRAMA selected", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.adventures:
+                movieCategory = "ADVENTURES";
+                Toast.makeText(this, "ADVENTURES selected", Toast.LENGTH_SHORT).show();
+                break;
         }
 
     }
@@ -72,11 +105,11 @@ public class RequestForm extends AppCompatActivity implements View.OnClickListen
     /* on clicking the 'send request' button this function will send the request to firebase */
     private void sendMovieRequest() {
 
-        String category = movieCategory.getText().toString().trim();
+        //String category = movieCategory.getText().toString().trim();
         String movie = movieName.getText().toString().trim();
         String userName = yourName.getText().toString().trim();
 
-        Request request = new Request(category, movie, userName, null);
+        Request request = new Request(movieCategory, movie, userName, null);
 
         /* set an ID from the database */
         request.setRequestID(rootRef.push().getKey());
