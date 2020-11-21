@@ -4,13 +4,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.wewatchapp.R;
+
 import com.example.wewatchapp.userPack.Request;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -99,6 +103,7 @@ public class OpenRequests extends AppCompatActivity implements View.OnClickListe
                     //requestTextView.setText(requestList);
 
 
+
                 }
 
             }
@@ -106,6 +111,7 @@ public class OpenRequests extends AppCompatActivity implements View.OnClickListe
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(OpenRequests.this,"Error!",Toast.LENGTH_LONG);
             }
+
         });
 
     }
