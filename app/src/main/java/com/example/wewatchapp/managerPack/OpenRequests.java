@@ -41,7 +41,7 @@ public class OpenRequests extends AppCompatActivity implements View.OnClickListe
 
 
         /* shows new requests from the database */
-        final TextView requestTextView = (TextView) findViewById(R.id.textNewRequest1);
+        final TextView requestTextView = (TextView) findViewById(R.id.textNewRequest);
         final TextView requestTextView2 = (TextView) findViewById(R.id.textNewRequest2);
         final TextView requestTextView3 = (TextView) findViewById(R.id.textNewRequest3);
         final TextView requestTextView4 = (TextView) findViewById(R.id.textNewRequest4);
@@ -62,6 +62,9 @@ public class OpenRequests extends AppCompatActivity implements View.OnClickListe
                 int text_view_num = 1;
 
                 for (DataSnapshot child : snapshot.getChildren()) {
+
+                    /* use for debug */
+                    System.out.println(child.toString());
 
                     /* use for debug */
                     String requestKey = child.getKey();
