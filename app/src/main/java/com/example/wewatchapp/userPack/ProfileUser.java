@@ -105,3 +105,14 @@ public class ProfileUser extends AppCompatActivity implements View.OnClickListen
 
     }
 }
+
+/**
+ rootRef.child("requests").addListenerForSingleValueEvent(new ValueEventListener() {
+@Override
+public void onDataChange(DataSnapshot dataSnapshot) {
+
+
+// Result will be holded Here
+for (DataSnapshot dsp : dataSnapshot.getChildren()) {
+req.add(dsp.getValue(Request.class)); //add result into array list
+}*/
