@@ -134,6 +134,22 @@
         app:layout_constraintTop_toBottomOf="@+id/banner"
         app:layout_constraintVertical_bias="0.505" />
 
+    <Button
+        android:id="@+id/close"
+        android:layout_width="129dp"
+        android:layout_height="49dp"
+        android:backgroundTint="#196AAD"
+        android:text="Mark As Closed"
+        android:textColor="#ffffff"
+        android:textSize="12dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.904"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/banner"
+        app:layout_constraintVertical_bias="0.837" />
+
     <TextView
         android:id="@+id/textOpenRequest"
         android:layout_width="310dp"
@@ -154,9 +170,9 @@
         android:layout_width="388dp"
         android:layout_height="161dp"
         android:fontFamily="sans-serif-black"
-        android:text="details:"
+        android:text=" "
         android:textColor="#196AAD"
-        android:textSize="16dp"
+        android:textSize="24dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
