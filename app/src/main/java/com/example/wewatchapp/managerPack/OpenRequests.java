@@ -22,16 +22,21 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.BreakIterator;
+
 public class OpenRequests extends AppCompatActivity implements View.OnClickListener{
 
 
     private TextView back;
+    private TextView open;
 
 
     /* firebase object */
     FirebaseDatabase database;
     /* firebase reference to the root */
     DatabaseReference rootRef;
+
+    final Request[] requests = new Request[6];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +45,9 @@ public class OpenRequests extends AppCompatActivity implements View.OnClickListe
 
         back = findViewById(R.id.back);
         back.setOnClickListener(this);
+
+        open = findViewById(R.id.open);
+        open.setOnClickListener(this);
 
         database = FirebaseDatabase.getInstance();
         rootRef = database.getReference();
@@ -52,6 +60,9 @@ public class OpenRequests extends AppCompatActivity implements View.OnClickListe
         final TextView requestTextView4 = (TextView) findViewById(R.id.textNewRequest4);
         final TextView requestTextView5 = (TextView) findViewById(R.id.textNewRequest5);
         final TextView requestTextView6 = (TextView) findViewById(R.id.textNewRequest6);
+
+
+
 
         /* database requests listener */
         rootRef.child("Requests").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -77,25 +88,26 @@ public class OpenRequests extends AppCompatActivity implements View.OnClickListe
                     String name = request.getUserName();
                     requestList = requestList + "\n" + requestLine + name;
 
+                    requests[text_view_num-1] = child.getValue(Request.class);
 
                     switch(text_view_num){
                         case 1:
-                            requestTextView.setText(requestLine + name + " Click Here");
+                            requestTextView.setText(requestLine + name + " Click");
                             break;
                         case 2:
-                            requestTextView2.setText(requestLine + name + " Click Here");
+                            requestTextView2.setText(requestLine + name + " Click");
                             break;
                         case 3:
-                            requestTextView3.setText(requestLine + name + " Click Here");
+                            requestTextView3.setText(requestLine + name + " Click");
                             break;
                         case 4:
-                            requestTextView4.setText(requestLine + name + " Click Here");
+                            requestTextView4.setText(requestLine + name + " Click");
                             break;
                         case 5:
-                            requestTextView5.setText(requestLine + name + " Click Here");
+                            requestTextView5.setText(requestLine + name + " Click");
                             break;
                         case 6:
-                            requestTextView6.setText(requestLine + name + " Click Here");
+                            requestTextView6.setText(requestLine + name + " Click");
                             break;
                     }
 
@@ -115,7 +127,12 @@ public class OpenRequests extends AppCompatActivity implements View.OnClickListe
 
         });
 
+
     }
+
+
+
+
 
     @Override
     public void onClick(View view) {
@@ -123,6 +140,11 @@ public class OpenRequests extends AppCompatActivity implements View.OnClickListe
         switch(view.getId()){
             case R.id.back:
                 startActivity(new Intent(this, ProfileManager.class));
+                break;
+            case R.id.open:
+                final TextView showTheRequest = (TextView) findViewById(R.id.showTheRequest);
+                showTheRequest.setText("Request from: " + requests[0].getUserName() +"\n"
+                        + "Movie: " + requests[0].getMovieName() + "\n");
                 break;
         }
 
