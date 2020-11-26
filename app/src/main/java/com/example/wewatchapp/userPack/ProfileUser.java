@@ -26,7 +26,7 @@ public class ProfileUser extends AppCompatActivity implements View.OnClickListen
 
     private FirebaseUser user;
     private DatabaseReference reference
-            = FirebaseDatabase.getInstance().getReference("Users");;
+            = FirebaseDatabase.getInstance().getReference("Users");
 
     Button moviesLibButton,feedButton,FriendsButton,myActivityButton,logOut,sendRequest;
 

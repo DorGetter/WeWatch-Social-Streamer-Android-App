@@ -16,6 +16,7 @@ import com.example.wewatchapp.R;
 
 import com.example.wewatchapp.userPack.Request;
 
+import com.google.android.gms.common.internal.FallbackServiceBroker;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -102,38 +103,51 @@ public class OpenRequests extends AppCompatActivity implements View.OnClickListe
                     /* use for debug */
                     System.out.println(child.toString());
 
-                    /* use for debug */
+                    /* store request data */
                     String requestKey = child.getKey();
                     Request request = child.getValue(Request.class);
+                    String status = request.getStatus();
+
+                    /* use for debug */
                     String name = request.getUserName();
                     requestList = requestList + "\n" + requestLine + name;
 
+
+
+
                     requests[text_view_num-1] = child.getValue(Request.class);
+
 
                     switch(text_view_num){
                         case 1:
-                            requestTextView.setText(requestLine + name + " Click");
+                            if(status.compareTo("CLOSED") != 0)
+                                requestTextView.setText(requestLine + "   " + name);
                             break;
                         case 2:
-                            requestTextView2.setText(requestLine + name + " Click");
+                            if(status.compareTo("CLOSED") != 0)
+                                requestTextView2.setText(requestLine + "   " + name);
                             break;
                         case 3:
-                            requestTextView3.setText(requestLine + name + " Click");
+                            if(status.compareTo("CLOSED") != 0)
+                                requestTextView3.setText(requestLine + "   " + name);
                             break;
                         case 4:
-                            requestTextView4.setText(requestLine + name + " Click");
+                            if(status.compareTo("CLOSED") != 0)
+                                requestTextView4.setText(requestLine + "   " + name);
                             break;
                         case 5:
-                            requestTextView5.setText(requestLine + name + " Click");
+                            if(status.compareTo("CLOSED") != 0)
+                                requestTextView5.setText(requestLine + "   " + name);
                             break;
                         case 6:
-                            requestTextView6.setText(requestLine + name + " Click");
+                            if(status.compareTo("CLOSED") != 0)
+                                requestTextView6.setText(requestLine + "   " + name);
                             break;
                     }
 
                     text_view_num ++;
 
-                    //requestTextView.setText(requestList);
+
 
 
 
@@ -221,7 +235,10 @@ public class OpenRequests extends AppCompatActivity implements View.OnClickListe
                 showTheRequestClosed.setText("Request from:  " + requestInWork.getUserName() + "\n"
                             + "For The Movie:  " + requestInWork.getMovieName() + "\n  Is Now Closed");
                 String closedRequestID = requestInWork.getRequestID();
-                rootRef.child("Requests").child(closedRequestID).removeValue();
+                requestInWork.setStatus("CLOSED");
+
+                rootRef.child("Requests").child(closedRequestID).setValue(requestInWork);
+                //rootRef.child("Requests").child(closedRequestID).removeValue();
                 break;
 
 

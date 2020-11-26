@@ -99,21 +99,9 @@
         app:layout_constraintTop_toBottomOf="@+id/banner"
         app:layout_constraintVertical_bias="0.005" />
 
-    <EditText
-        android:id="@+id/yourName"
-        android:layout_width="358dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="316dp"
-        android:ems="10"
-        android:hint="Your Name"
-        android:inputType="textEmailAddress"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/banner"
-        app:layout_constraintHorizontal_bias="0.49"
-        app:layout_constraintStart_toStartOf="@+id/banner"
-        app:layout_constraintTop_toBottomOf="@+id/banner"
-        app:layout_constraintVertical_bias="0.0" />
+
+
+
 
     <Button
         android:id="@+id/sendRequest"
@@ -129,7 +117,7 @@
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/banner"
-        app:layout_constraintVertical_bias="0.675" />
+        app:layout_constraintVertical_bias="0.835" />
 
     <Button
         android:id="@+id/back"

@@ -18,8 +18,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class RequestForm extends AppCompatActivity implements View.OnClickListener{
 
@@ -27,17 +30,43 @@ public class RequestForm extends AppCompatActivity implements View.OnClickListen
     private TextView sendRequest;
     private TextView back;
     private TextView action, comedy, drama, adventures;
-    private EditText movieName, yourName ;
+
+
+    private EditText movieName;
 
     /* firebase object */
     FirebaseDatabase database;
     /* firebase reference to the root */
     DatabaseReference rootRef;
 
+
+    private FirebaseUser user;
+    private DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
+
+    String userName = "";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_form);
+
+        user = FirebaseAuth.getInstance().getCurrentUser();
+
+        reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User userProfile    = snapshot.getValue(User.class);
+                if(  userProfile   != null){
+                    userName = userProfile.getFullName();
+
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         sendRequest = findViewById(R.id.sendRequest);
         sendRequest.setOnClickListener(this);
@@ -58,7 +87,9 @@ public class RequestForm extends AppCompatActivity implements View.OnClickListen
         adventures.setOnClickListener(this);
 
         movieName = (EditText) findViewById(R.id.movieName);
-        yourName = (EditText) findViewById(R.id.yourName);
+
+
+
 
         /* set the path to requests table */
         database = FirebaseDatabase.getInstance();
@@ -105,9 +136,7 @@ public class RequestForm extends AppCompatActivity implements View.OnClickListen
     /* on clicking the 'send request' button this function will send the request to firebase */
     private void sendMovieRequest() {
 
-        //String category = movieCategory.getText().toString().trim();
         String movie = movieName.getText().toString().trim();
-        String userName = yourName.getText().toString().trim();
 
         Request request = new Request(movieCategory, movie, userName, null);
 
@@ -116,7 +145,8 @@ public class RequestForm extends AppCompatActivity implements View.OnClickListen
         /* insert the movie by its ID */
         rootRef.child(request.getRequestID()).setValue(request);
 
-        Toast.makeText(this, "Request sent...", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Thanks   " + userName
+                + "\nYour Request sent...", Toast.LENGTH_LONG).show();
 
     }
 }
