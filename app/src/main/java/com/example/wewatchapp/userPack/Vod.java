@@ -332,4 +332,10 @@ public class Vod extends AppCompatActivity implements MovieItemClickListenerNew 
         }
     }
 
+    private void searchMovie(String name){
+        mDatabaserefence = FirebaseDatabase.getInstance().getReference("videos");
+        progressDialog.setMessage("loading....");
+        progressDialog.show();
+
+    }
 }
