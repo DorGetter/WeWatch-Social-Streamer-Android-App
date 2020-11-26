@@ -146,7 +146,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="Search " />
+                android:hint="Search " />
         </SearchView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
