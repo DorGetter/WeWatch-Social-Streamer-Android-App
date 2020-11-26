@@ -83,7 +83,7 @@ public class ProfileManager extends AppCompatActivity implements View.OnClickLis
                 startActivity(new Intent(this, OpenRequests.class));
                 break;
             case R.id.closedRequestsButton:
-                //directing to closedRequests layout
+                startActivity(new Intent(this, ClosedRequests.class));
                 break;
             case R.id.myMoviesButton:
                 //directing to myMovies layout
