@@ -112,22 +112,22 @@ public class OpenRequests extends AppCompatActivity implements View.OnClickListe
 
                     switch(text_view_num){
                         case 1:
-                            requestTextView.setText(requestLine + name + " Click");
+                            requestTextView.setText(requestLine + "   " + name);
                             break;
                         case 2:
-                            requestTextView2.setText(requestLine + name + " Click");
+                            requestTextView2.setText(requestLine + "   " + name);
                             break;
                         case 3:
-                            requestTextView3.setText(requestLine + name + " Click");
+                            requestTextView3.setText(requestLine + "   " + name);
                             break;
                         case 4:
-                            requestTextView4.setText(requestLine + name + " Click");
+                            requestTextView4.setText(requestLine + "   " + name);
                             break;
                         case 5:
-                            requestTextView5.setText(requestLine + name + " Click");
+                            requestTextView5.setText(requestLine + "   " + name);
                             break;
                         case 6:
-                            requestTextView6.setText(requestLine + name + " Click");
+                            requestTextView6.setText(requestLine + "   " + name);
                             break;
                     }
 
