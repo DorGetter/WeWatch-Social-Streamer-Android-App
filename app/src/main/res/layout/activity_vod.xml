@@ -7,29 +7,33 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
     tools:context=".userPack.Vod">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/slider_pager"
             android:layout_width="0dp"
             android:layout_height="275dp"
+            android:layout_marginTop="44dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/indicator"
-            android:background="@color/text_bg_blue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/text_bg_blue"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/slider_pager"
             app:tabBackground="@drawable/indicator_selector"
             app:tabGravity="center"
-            app:tabIndicatorHeight="0dp">
-        </com.google.android.material.tabs.TabLayout>
+            app:tabIndicatorHeight="0dp"></com.google.android.material.tabs.TabLayout>
+
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
@@ -98,17 +102,16 @@
             android:id="@+id/tabActionMovies"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/text_bg_blue"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:tabMode="scrollable"
-            android:background="@color/text_bg_blue"
             app:layout_constraintTop_toBottomOf="@+id/rv_movies_week"
-            />
+            app:tabMode="scrollable" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/tabrecyler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/tabrecyler"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="@+id/tabActionMovies"
@@ -116,6 +119,35 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tabActionMovies" />
 
+        <SearchView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:addStatesFromChildren="false"
+            android:background="#E81414"
+            android:clickable="true"
+            android:orientation="vertical"
+            android:scrollbarSize="5dp"
+            android:text="Search"
+            android:textAlignment="viewStart"
+
+            android:textColor="@color/text_light_blue"
+            app:actionViewClass="android.widget.SearchView"
+            app:layout_constraintBottom_toTopOf="@+id/slider_pager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            app:showAsAction="ifRoom|withText">
+
+            <EditText
+                android:id="@+id/editTextTextPersonName2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Search " />
+        </SearchView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
