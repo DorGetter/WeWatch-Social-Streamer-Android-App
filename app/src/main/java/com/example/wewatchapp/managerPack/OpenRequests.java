@@ -98,7 +98,12 @@ public class OpenRequests extends AppCompatActivity implements View.OnClickListe
                 /* use for switch case to insert each request to correct number of text view */
                 int text_view_num = 1;
 
+                /* use for increment the 'text view num' only if the request is 'CLOSED' */
+                boolean toINC = false;
+
                 for (DataSnapshot child : snapshot.getChildren()) {
+
+                    toINC = false;
 
                     /* use for debug */
                     System.out.println(child.toString());
@@ -113,9 +118,11 @@ public class OpenRequests extends AppCompatActivity implements View.OnClickListe
                     requestList = requestList + "\n" + requestLine + name;
 
 
-
-
-                    requests[text_view_num-1] = child.getValue(Request.class);
+                    /* show only 'OPEN' requests */
+                    if(status.compareTo("CLOSED") != 0) {
+                        requests[text_view_num - 1] = child.getValue(Request.class);
+                        toINC = true;
+                    }
 
 
                     switch(text_view_num){
@@ -145,7 +152,8 @@ public class OpenRequests extends AppCompatActivity implements View.OnClickListe
                             break;
                     }
 
-                    text_view_num ++;
+                    if(toINC)
+                        text_view_num ++;
 
 
 
