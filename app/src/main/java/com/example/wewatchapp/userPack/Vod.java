@@ -5,22 +5,29 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.Movie;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.text.method.KeyListener;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.utils.widget.MockView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.wewatchapp.Adapter.MoviesShowAdapter;
 import com.example.wewatchapp.Adapter.SliderPagerAdapterNew;
+import com.example.wewatchapp.Home.MainActivity;
 import com.example.wewatchapp.Model.GetVideoDetails;
 import com.example.wewatchapp.Model.MovieItemClickListenerNew;
 import com.example.wewatchapp.Model.SliderSide;
@@ -38,7 +45,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Vod extends AppCompatActivity implements MovieItemClickListenerNew {
+public class Vod extends AppCompatActivity implements MovieItemClickListenerNew, View.OnClickListener {
 
     MoviesShowAdapter moviesShowAdapter;
     DatabaseReference mDatabaserefence ;
@@ -51,6 +58,12 @@ public class Vod extends AppCompatActivity implements MovieItemClickListenerNew 
     private TabLayout indicator,tabActionMovies;
     private RecyclerView MoviesRV ,moviesRvWeek ,tab;
 
+    private TextView SearchBar;
+    private EditText TitleEditText;
+    private String MovieTitle;
+    private ImageView MovieThumbnailImg,MovieCoverImg;
+
+
     ProgressDialog progressDialog;
 
     @Override
@@ -61,6 +74,13 @@ public class Vod extends AppCompatActivity implements MovieItemClickListenerNew 
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.actionbar);
 
+
+        TitleEditText  = (EditText) findViewById(R.id.search);
+        MovieTitle = TitleEditText    .getText().toString().trim();
+        SearchBar = (TextView) findViewById(R.id.search);
+        SearchBar.setOnClickListener(this);
+
+
         progressDialog = new ProgressDialog(this);
         iniViews();
         addAllMovies();
@@ -70,6 +90,7 @@ public class Vod extends AppCompatActivity implements MovieItemClickListenerNew 
         movieviewtab();
         // getActionMovies();
         askPermission();
+        //searchMovie();
 
     }
 
@@ -254,6 +275,11 @@ public class Vod extends AppCompatActivity implements MovieItemClickListenerNew 
         startActivity(intent,options.toBundle());
     }
 
+    @Override
+    public void onClick(View view) {
+        searchMovie();
+    }
+
     public class SliderTimer extends TimerTask {
 
 
@@ -332,10 +358,57 @@ public class Vod extends AppCompatActivity implements MovieItemClickListenerNew 
         }
     }
 
-    private void searchMovie(String name){
-        mDatabaserefence = FirebaseDatabase.getInstance().getReference("videos");
-        progressDialog.setMessage("loading....");
-        progressDialog.show();
+    private void searchMovie(){
+        MovieTitle = TitleEditText    .getText().toString().trim();
+        if(MovieTitle.isEmpty()){
+            TitleEditText.setError("Please provide a title");
+            TitleEditText.requestFocus();
+            return;
+        }
+        else {
+
+            mDatabaserefence = FirebaseDatabase.getInstance().getReference("videos");
+            mDatabaserefence.orderByChild("video_name").equalTo(MovieTitle).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.hasChildren()) {
+                        progressDialog.setMessage("Searching for "+ MovieTitle);
+                        progressDialog.show();
+                        for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                            String category = userSnapshot.child("video_category").getValue().toString().trim();
+                            String description = userSnapshot.child("video_description").getValue().toString().trim();
+                            String slide = userSnapshot.child(("video_slide")).getValue().toString().trim();
+                            String thumb = userSnapshot.child(("video_thumb")).getValue().toString().trim();
+                            String type = userSnapshot.child(("video_type")).getValue().toString().trim();
+                            String URL = userSnapshot.child("video_url").getValue().toString().trim();
+
+                            GetVideoDetails search_result = new GetVideoDetails(slide, type, thumb, URL, MovieTitle, description, category);
+                            setContentView(R.layout.activity_movie_detail_new);
+                            MovieCoverImg = (ImageView) findViewById(R.id.imageView);
+                            onMovieClick(search_result, MovieCoverImg);
+                            setContentView(R.layout.activity_vod);
+                            progressDialog.dismiss();
+                        }
+
+                    }
+                    else {
+                        TitleEditText.setError("Movie not found, you will be able to request it soon");
+                        //TODO: add here ability to request that movie
+                        TitleEditText.requestFocus();
+                        return;
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
+            //startActivity(new Intent(Vod.this, MovieDetailNewActivity.class))
+
+        }
+
 
     }
 }
