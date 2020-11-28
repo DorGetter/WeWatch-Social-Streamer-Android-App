@@ -95,7 +95,7 @@ public class ProfileManager extends AppCompatActivity implements View.OnClickLis
                 break;
 
             case R.id.M_myActivityButton:
-                //directing to Statistics layout
+                startActivity(new Intent(this, ManagerMyActivity.class));
                 break;
 
             case R.id.signOut:

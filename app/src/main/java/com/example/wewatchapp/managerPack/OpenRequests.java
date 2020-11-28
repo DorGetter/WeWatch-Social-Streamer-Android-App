@@ -16,7 +16,10 @@ import com.example.wewatchapp.R;
 
 import com.example.wewatchapp.userPack.Request;
 
+import com.example.wewatchapp.userPack.User;
 import com.google.android.gms.common.internal.FallbackServiceBroker;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -41,10 +44,34 @@ public class OpenRequests extends AppCompatActivity implements View.OnClickListe
     /* use to store requests from firebase */
     final Request[] requests = new Request[6];
 
+    private FirebaseUser manager;
+    final private DatabaseReference referenceManager= FirebaseDatabase.getInstance().getReference("Managers");
+
+    String managerName = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_open_requests);
+
+        manager = FirebaseAuth.getInstance().getCurrentUser();
+
+        // get the current manager details
+        referenceManager.child(manager.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                UserManager userProfile = snapshot.getValue(UserManager.class);
+                if(userProfile != null){
+                    managerName = userProfile.getFullName();
+
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(OpenRequests.this,"Something wrong happened!",Toast.LENGTH_LONG);
+            }
+        });
+
 
         back = findViewById(R.id.back);
         back.setOnClickListener(this);
@@ -243,9 +270,12 @@ public class OpenRequests extends AppCompatActivity implements View.OnClickListe
                 showTheRequestClosed.setText("Request from:  " + requestInWork.getUserName() + "\n"
                             + "For The Movie:  " + requestInWork.getMovieName() + "\n  Is Now Closed");
                 String closedRequestID = requestInWork.getRequestID();
+
                 requestInWork.setStatus("CLOSED");
+                requestInWork.setClosedBy(managerName);
 
                 rootRef.child("Requests").child(closedRequestID).setValue(requestInWork);
+
                 //rootRef.child("Requests").child(closedRequestID).removeValue();
                 break;
 

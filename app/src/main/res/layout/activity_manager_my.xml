@@ -40,21 +40,7 @@
 
 
 
-    <Button
-        android:id="@+id/close"
-        android:layout_width="129dp"
-        android:layout_height="49dp"
-        android:backgroundTint="#196AAD"
-        android:text="Mark As Closed"
-        android:textColor="#ffffff"
-        android:textSize="12dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.904"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/banner"
-        app:layout_constraintVertical_bias="0.837" />
+
 
     <TextView
         android:id="@+id/textOpenRequest"
@@ -72,13 +58,12 @@
         app:layout_constraintVertical_bias="0.016" />
 
 
-
     <TextView
         android:id="@+id/textNewActivity"
         android:layout_width="270dp"
         android:layout_height="43dp"
         android:fontFamily="sans-serif-black"
-        android:text="Activity 1 :"
+        android:text=""
         android:textColor="#196AAD"
         android:textSize="18dp"
         android:textStyle="bold"
@@ -87,14 +72,14 @@
         app:layout_constraintHorizontal_bias="0.113"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/banner"
-        app:layout_constraintVertical_bias="0.079" />
+        app:layout_constraintVertical_bias="0.136" />
 
     <TextView
         android:id="@+id/textNewActivity2"
         android:layout_width="270dp"
         android:layout_height="43dp"
         android:fontFamily="sans-serif-black"
-        android:text="Activity 2 :"
+        android:text=""
         android:textColor="#196AAD"
         android:textSize="18dp"
         android:textStyle="bold"
@@ -103,14 +88,14 @@
         app:layout_constraintHorizontal_bias="0.113"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/banner"
-        app:layout_constraintVertical_bias="0.163" />
+        app:layout_constraintVertical_bias="0.27" />
 
     <TextView
         android:id="@+id/textNewActivity3"
         android:layout_width="270dp"
         android:layout_height="43dp"
         android:fontFamily="sans-serif-black"
-        android:text="Activity 3 :"
+        android:text=""
         android:textColor="#196AAD"
         android:textSize="18dp"
         android:textStyle="bold"
@@ -119,14 +104,14 @@
         app:layout_constraintHorizontal_bias="0.113"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/banner"
-        app:layout_constraintVertical_bias="0.252" />
+        app:layout_constraintVertical_bias="0.413" />
 
     <TextView
         android:id="@+id/textNewActivity4"
         android:layout_width="270dp"
         android:layout_height="43dp"
         android:fontFamily="sans-serif-black"
-        android:text="Activity 4 :"
+        android:text=""
         android:textColor="#196AAD"
         android:textSize="18dp"
         android:textStyle="bold"
@@ -135,14 +120,14 @@
         app:layout_constraintHorizontal_bias="0.113"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/banner"
-        app:layout_constraintVertical_bias="0.337" />
+        app:layout_constraintVertical_bias="0.562" />
 
     <TextView
         android:id="@+id/textNewActivity5"
         android:layout_width="270dp"
         android:layout_height="43dp"
         android:fontFamily="sans-serif-black"
-        android:text="Activity 5 :"
+        android:text=""
         android:textColor="#196AAD"
         android:textSize="18dp"
         android:textStyle="bold"
@@ -151,14 +136,14 @@
         app:layout_constraintHorizontal_bias="0.113"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/banner"
-        app:layout_constraintVertical_bias="0.424" />
+        app:layout_constraintVertical_bias="0.71" />
 
     <TextView
         android:id="@+id/textNewActivity6"
         android:layout_width="270dp"
         android:layout_height="43dp"
         android:fontFamily="sans-serif-black"
-        android:text="Activity 6 :"
+        android:text=""
         android:textColor="#196AAD"
         android:textSize="18dp"
         android:textStyle="bold"
@@ -167,7 +152,7 @@
         app:layout_constraintHorizontal_bias="0.113"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/banner"
-        app:layout_constraintVertical_bias="0.505" />
+        app:layout_constraintVertical_bias="0.86" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
