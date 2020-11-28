@@ -29,8 +29,12 @@ public class RequestForm extends AppCompatActivity implements View.OnClickListen
 
     private TextView sendRequest;
     private TextView back;
-    private TextView action, comedy, drama, adventures;
 
+    private EditText movieCategory, movieName, yourName ;
+    private FirebaseUser user;
+    private DatabaseReference reference
+            = FirebaseDatabase.getInstance().getReference("Users");
+    private TextView action, comedy, drama, adventures;
 
     private EditText movieName;
 
@@ -40,11 +44,7 @@ public class RequestForm extends AppCompatActivity implements View.OnClickListen
     DatabaseReference rootRef;
 
 
-    private FirebaseUser user;
-    private DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
-
     String userName = "";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +70,8 @@ public class RequestForm extends AppCompatActivity implements View.OnClickListen
 
         sendRequest = findViewById(R.id.sendRequest);
         sendRequest.setOnClickListener(this);
+
+        user = FirebaseAuth.getInstance().getCurrentUser();
 
         back = findViewById(R.id.back);
         back.setOnClickListener(this);
@@ -108,6 +110,20 @@ public class RequestForm extends AppCompatActivity implements View.OnClickListen
 
             case R.id.sendRequest:
                 sendMovieRequest();
+                reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        User userProfile    = snapshot.getValue(User.class);
+                        if(  userProfile   != null){
+                            userProfile.Logit("Requested "+movieName.toString());
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
                 break;
 
             case R.id.action:
