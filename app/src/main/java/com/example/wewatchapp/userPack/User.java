@@ -1,10 +1,13 @@
 package com.example.wewatchapp.userPack;
 
+import java.util.ArrayList;
+
 public class User {
 
     private String fullName;
     private int age;
     private String email;
+    private ArrayList<String> log = new ArrayList<String>();;
 
 
     public User() {
@@ -15,6 +18,7 @@ public class User {
         this.fullName   = fullName;
         this.age        = age;
         this.email      = email;
+        //this.log = new ArrayList<String>();
     }
 
 
@@ -28,6 +32,12 @@ public class User {
 
     public String getEmail() {
         return email;
+    }
+
+    public ArrayList<String> getLog() { return log; }
+
+    protected void Logit(String to_log){
+        log.add("I Just "+to_log+"\n");
     }
 
 }

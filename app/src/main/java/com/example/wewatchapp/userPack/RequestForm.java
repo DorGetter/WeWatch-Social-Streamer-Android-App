@@ -18,8 +18,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class RequestForm extends AppCompatActivity implements View.OnClickListener{
 
@@ -27,11 +30,14 @@ public class RequestForm extends AppCompatActivity implements View.OnClickListen
     private TextView sendRequest;
     private TextView back;
     private EditText movieCategory, movieName, yourName ;
-
+    private FirebaseUser user;
+    private DatabaseReference reference
+            = FirebaseDatabase.getInstance().getReference("Users");;
     /* firebase object */
     FirebaseDatabase database;
     /* firebase reference to the root */
     DatabaseReference rootRef;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +46,8 @@ public class RequestForm extends AppCompatActivity implements View.OnClickListen
 
         sendRequest = findViewById(R.id.sendRequest);
         sendRequest.setOnClickListener(this);
+
+        user = FirebaseAuth.getInstance().getCurrentUser();
 
         back = findViewById(R.id.back);
         back.setOnClickListener(this);
@@ -63,6 +71,20 @@ public class RequestForm extends AppCompatActivity implements View.OnClickListen
 
             case R.id.sendRequest:
                 sendMovieRequest();
+                reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        User userProfile    = snapshot.getValue(User.class);
+                        if(  userProfile   != null){
+                            userProfile.Logit("Requested "+movieName.toString());
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
                 break;
 
         }

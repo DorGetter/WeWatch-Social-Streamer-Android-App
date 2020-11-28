@@ -34,6 +34,8 @@ import com.example.wewatchapp.Model.SliderSide;
 import com.example.wewatchapp.R;
 import com.example.wewatchapp.utilitiesPack.MovieDetailNewActivity;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -61,8 +63,10 @@ public class Vod extends AppCompatActivity implements MovieItemClickListenerNew,
     private TextView SearchBar;
     private EditText TitleEditText;
     private String MovieTitle;
-    private ImageView MovieThumbnailImg,MovieCoverImg;
-
+    private ImageView MovieCoverImg;
+    private FirebaseUser user;
+    private DatabaseReference reference
+            = FirebaseDatabase.getInstance().getReference("Users");;
 
     ProgressDialog progressDialog;
 
@@ -79,6 +83,7 @@ public class Vod extends AppCompatActivity implements MovieItemClickListenerNew,
         MovieTitle = TitleEditText    .getText().toString().trim();
         SearchBar = (TextView) findViewById(R.id.search);
         SearchBar.setOnClickListener(this);
+        user = FirebaseAuth.getInstance().getCurrentUser();
 
 
         progressDialog = new ProgressDialog(this);
@@ -278,6 +283,20 @@ public class Vod extends AppCompatActivity implements MovieItemClickListenerNew,
     @Override
     public void onClick(View view) {
         searchMovie();
+        reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User userProfile    = snapshot.getValue(User.class);
+                if(  userProfile   != null){
+                    userProfile.Logit("Searched for "+ MovieTitle);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 
     public class SliderTimer extends TimerTask {

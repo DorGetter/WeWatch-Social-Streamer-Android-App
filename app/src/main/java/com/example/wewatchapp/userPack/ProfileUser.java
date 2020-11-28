@@ -1,5 +1,6 @@
 package com.example.wewatchapp.userPack;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -21,15 +22,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class ProfileUser extends AppCompatActivity implements View.OnClickListener {
-
-
-
     private FirebaseUser user;
     private DatabaseReference reference
             = FirebaseDatabase.getInstance().getReference("Users");;
 
     Button moviesLibButton,feedButton,FriendsButton,myActivityButton,logOut,sendRequest;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,12 +90,13 @@ public class ProfileUser extends AppCompatActivity implements View.OnClickListen
                 startActivity(new Intent(this,Vod.class));
                 break;
             case R.id.myActivityButton:
+                //startActivity(new Intent(this,MyActivity.class));
                 break;
             case R.id.SendRequests:
-                startActivity(new Intent(this, RequestForm.class));
+                startActivity(new Intent(this,RequestForm.class));
                 break;
             case R.id.signOut:
-                startActivity(new Intent( this, MainActivity.class));
+                startActivity(new Intent( this,MainActivity.class));
                 break;
 
         }
