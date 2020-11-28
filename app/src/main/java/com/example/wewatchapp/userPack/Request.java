@@ -11,6 +11,9 @@ public class Request {
     /* open/closed */
     private String status;
 
+    /* witch manager worked on this request */
+    private String closedBy;
+
 
     public Request() {
 
@@ -23,6 +26,8 @@ public class Request {
         this.requestID = requestID;
 
         this.status = "OPEN";
+
+        this.closedBy = "";
     }
 
 
@@ -47,6 +52,10 @@ public class Request {
         return status;
     }
 
+    public String getClosedBy() {
+        return closedBy;
+    }
+
 
 
     /* setters */
@@ -68,6 +77,10 @@ public class Request {
 
     public void setStatus(String _status) {
         this.status = _status;
+    }
+
+    public void setClosedBy(String manager) {
+        this.closedBy = manager;
     }
 
 
