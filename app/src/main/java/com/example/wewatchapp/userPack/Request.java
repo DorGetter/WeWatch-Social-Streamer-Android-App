@@ -8,6 +8,9 @@ public class Request {
     private String userName;
     private String requestID;
 
+    /* open/closed */
+    private String status;
+
 
     public Request() {
 
@@ -18,8 +21,12 @@ public class Request {
         this.movieName = movieName;
         this.userName = userName;
         this.requestID = requestID;
+
+        this.status = "OPEN";
     }
 
+
+    /* getters */
     public String getCategory() {
         return category;
     }
@@ -36,7 +43,13 @@ public class Request {
         return requestID;
     }
 
+    public String getStatus() {
+        return status;
+    }
 
+
+
+    /* setters */
     public void setCategory(String category) {
         this.category = category;
     }
@@ -53,5 +66,22 @@ public class Request {
         this.requestID = requestID;
     }
 
+    public void setStatus(String _status) {
+        this.status = _status;
+    }
+
+
+
+    @Override
+    public String toString() {
+        return "Request{" +
+                "category='" + category + '\'' +
+                ", movieName='" + movieName + '\'' +
+                ", userName='" + userName + '\'' +
+                ", requestID='" + requestID + '\'' +
+                '}';
+    }
 
 }
+
+

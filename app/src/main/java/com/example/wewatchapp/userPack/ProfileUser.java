@@ -24,7 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 public class ProfileUser extends AppCompatActivity implements View.OnClickListener {
     private FirebaseUser user;
     private DatabaseReference reference
-            = FirebaseDatabase.getInstance().getReference("Users");;
+            = FirebaseDatabase.getInstance().getReference("Users");
 
     Button moviesLibButton,feedButton,FriendsButton,myActivityButton,logOut,sendRequest;
 
@@ -103,3 +103,14 @@ public class ProfileUser extends AppCompatActivity implements View.OnClickListen
 
     }
 }
+
+/**
+ rootRef.child("requests").addListenerForSingleValueEvent(new ValueEventListener() {
+@Override
+public void onDataChange(DataSnapshot dataSnapshot) {
+
+
+// Result will be holded Here
+for (DataSnapshot dsp : dataSnapshot.getChildren()) {
+req.add(dsp.getValue(Request.class)); //add result into array list
+}*/

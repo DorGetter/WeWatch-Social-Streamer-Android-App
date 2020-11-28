@@ -29,20 +29,44 @@ public class RequestForm extends AppCompatActivity implements View.OnClickListen
 
     private TextView sendRequest;
     private TextView back;
+
     private EditText movieCategory, movieName, yourName ;
     private FirebaseUser user;
     private DatabaseReference reference
-            = FirebaseDatabase.getInstance().getReference("Users");;
+            = FirebaseDatabase.getInstance().getReference("Users");
+    private TextView action, comedy, drama, adventures;
+
+    private EditText movieName;
+
     /* firebase object */
     FirebaseDatabase database;
     /* firebase reference to the root */
     DatabaseReference rootRef;
 
 
+    String userName = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_form);
+
+        user = FirebaseAuth.getInstance().getCurrentUser();
+
+        reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User userProfile    = snapshot.getValue(User.class);
+                if(  userProfile   != null){
+                    userName = userProfile.getFullName();
+
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         sendRequest = findViewById(R.id.sendRequest);
         sendRequest.setOnClickListener(this);
@@ -52,14 +76,29 @@ public class RequestForm extends AppCompatActivity implements View.OnClickListen
         back = findViewById(R.id.back);
         back.setOnClickListener(this);
 
-        movieCategory = (EditText) findViewById(R.id.movieCategory);
+        action = findViewById(R.id.action);
+        action.setOnClickListener(this);
+
+        comedy = findViewById(R.id.comedy);
+        comedy.setOnClickListener(this);
+
+        drama = findViewById(R.id.drama);
+        drama.setOnClickListener(this);
+
+        adventures = findViewById(R.id.adventures);
+        adventures.setOnClickListener(this);
+
         movieName = (EditText) findViewById(R.id.movieName);
-        yourName = (EditText) findViewById(R.id.yourName);
+
+
+
 
         /* set the path to requests table */
         database = FirebaseDatabase.getInstance();
         rootRef = database.getReference("Requests");
     }
+
+    String movieCategory;
 
     @Override
     public void onClick(View view) {
@@ -87,6 +126,25 @@ public class RequestForm extends AppCompatActivity implements View.OnClickListen
 
                 break;
 
+            case R.id.action:
+                movieCategory = "ACTION";
+                Toast.makeText(this, "ACTION selected", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.comedy:
+                movieCategory = "COMEDY";
+                Toast.makeText(this, "COMEDY selected", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.drama:
+                movieCategory = "DRAMA";
+                Toast.makeText(this, "DRAMA selected", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.adventures:
+                movieCategory = "ADVENTURES";
+                Toast.makeText(this, "ADVENTURES selected", Toast.LENGTH_SHORT).show();
+                break;
         }
 
     }
@@ -94,18 +152,17 @@ public class RequestForm extends AppCompatActivity implements View.OnClickListen
     /* on clicking the 'send request' button this function will send the request to firebase */
     private void sendMovieRequest() {
 
-        String category = movieCategory.getText().toString().trim();
         String movie = movieName.getText().toString().trim();
-        String userName = yourName.getText().toString().trim();
 
-        Request request = new Request(category, movie, userName, null);
+        Request request = new Request(movieCategory, movie, userName, null);
 
         /* set an ID from the database */
         request.setRequestID(rootRef.push().getKey());
         /* insert the movie by its ID */
         rootRef.child(request.getRequestID()).setValue(request);
 
-        Toast.makeText(this, "Request sent...", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Thanks   " + userName
+                + "\nYour Request sent...", Toast.LENGTH_LONG).show();
 
     }
 }

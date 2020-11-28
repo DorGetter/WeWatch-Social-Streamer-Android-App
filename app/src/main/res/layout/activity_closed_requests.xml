@@ -135,13 +135,13 @@
         app:layout_constraintVertical_bias="0.505" />
 
     <Button
-        android:id="@+id/close"
+        android:id="@+id/remove"
         android:layout_width="129dp"
         android:layout_height="49dp"
         android:backgroundTint="#196AAD"
-        android:text="Mark As Closed"
+        android:text="Remove"
         android:textColor="#ffffff"
-        android:textSize="12dp"
+        android:textSize="16dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -155,7 +155,7 @@
         android:layout_width="310dp"
         android:layout_height="26dp"
         android:fontFamily="sans-serif-black"
-        android:text="            Check out your open requests"
+        android:text="            Check out your closed requests"
         android:textColor="#196AAD"
         android:textSize="16dp"
         android:textStyle="bold"

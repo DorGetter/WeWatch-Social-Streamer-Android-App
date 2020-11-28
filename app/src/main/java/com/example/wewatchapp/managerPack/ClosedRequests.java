@@ -1,37 +1,28 @@
 package com.example.wewatchapp.managerPack;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.wewatchapp.R;
-
 import com.example.wewatchapp.userPack.Request;
-
-import com.google.android.gms.common.internal.FallbackServiceBroker;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.BreakIterator;
-
-public class OpenRequests extends AppCompatActivity implements View.OnClickListener{
+public class ClosedRequests extends AppCompatActivity implements View.OnClickListener{
 
     /* buttons */
     private TextView back;
     private TextView open, open2, open3, open4, open5, open6;
-    private TextView close;
-
+    private TextView remove;
 
     /* firebase object */
     FirebaseDatabase database;
@@ -41,16 +32,17 @@ public class OpenRequests extends AppCompatActivity implements View.OnClickListe
     /* use to store requests from firebase */
     final Request[] requests = new Request[6];
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_open_requests);
+        setContentView(R.layout.activity_closed_requests);
 
         back = findViewById(R.id.back);
         back.setOnClickListener(this);
 
-        close = findViewById(R.id.close);
-        close.setOnClickListener(this);
+        remove = findViewById(R.id.remove);
+        remove.setOnClickListener(this);
 
         open = findViewById(R.id.open);
         open.setOnClickListener(this);
@@ -73,7 +65,6 @@ public class OpenRequests extends AppCompatActivity implements View.OnClickListe
         database = FirebaseDatabase.getInstance();
         rootRef = database.getReference();
 
-
         /* shows new requests from the database */
         final TextView requestTextView = (TextView) findViewById(R.id.textNewRequest);
         final TextView requestTextView2 = (TextView) findViewById(R.id.textNewRequest2);
@@ -81,8 +72,6 @@ public class OpenRequests extends AppCompatActivity implements View.OnClickListe
         final TextView requestTextView4 = (TextView) findViewById(R.id.textNewRequest4);
         final TextView requestTextView5 = (TextView) findViewById(R.id.textNewRequest5);
         final TextView requestTextView6 = (TextView) findViewById(R.id.textNewRequest6);
-
-
 
 
         /* database requests listener */
@@ -94,7 +83,8 @@ public class OpenRequests extends AppCompatActivity implements View.OnClickListe
                 String requestList = "";
 
                 /* to show each request by name in different text view */
-                String requestLine = "new request from: ";
+                String requestLine = "closed request from: ";
+
                 /* use for switch case to insert each request to correct number of text view */
                 int text_view_num = 1;
 
@@ -118,8 +108,9 @@ public class OpenRequests extends AppCompatActivity implements View.OnClickListe
                     requestList = requestList + "\n" + requestLine + name;
 
 
-                    /* show only 'OPEN' requests */
-                    if(status.compareTo("CLOSED") != 0) {
+
+                    /* show only 'CLOSED' requests */
+                    if(status.compareTo("CLOSED") == 0) {
                         requests[text_view_num - 1] = child.getValue(Request.class);
                         toINC = true;
                     }
@@ -127,27 +118,27 @@ public class OpenRequests extends AppCompatActivity implements View.OnClickListe
 
                     switch(text_view_num){
                         case 1:
-                            if(status.compareTo("CLOSED") != 0)
+                            if(status.compareTo("OPEN") != 0)
                                 requestTextView.setText(requestLine + "   " + name);
                             break;
                         case 2:
-                            if(status.compareTo("CLOSED") != 0)
+                            if(status.compareTo("OPEN") != 0)
                                 requestTextView2.setText(requestLine + "   " + name);
                             break;
                         case 3:
-                            if(status.compareTo("CLOSED") != 0)
+                            if(status.compareTo("OPEN") != 0)
                                 requestTextView3.setText(requestLine + "   " + name);
                             break;
                         case 4:
-                            if(status.compareTo("CLOSED") != 0)
+                            if(status.compareTo("OPEN") != 0)
                                 requestTextView4.setText(requestLine + "   " + name);
                             break;
                         case 5:
-                            if(status.compareTo("CLOSED") != 0)
+                            if(status.compareTo("OPEN") != 0)
                                 requestTextView5.setText(requestLine + "   " + name);
                             break;
                         case 6:
-                            if(status.compareTo("CLOSED") != 0)
+                            if(status.compareTo("OPEN") != 0)
                                 requestTextView6.setText(requestLine + "   " + name);
                             break;
                     }
@@ -164,14 +155,12 @@ public class OpenRequests extends AppCompatActivity implements View.OnClickListe
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(OpenRequests.this,"Error!",Toast.LENGTH_LONG);
+                Toast.makeText(ClosedRequests.this,"Error!",Toast.LENGTH_LONG);
             }
 
         });
 
-
     }
-
 
     /* use to store the request that the manger want to work on */
     Request requestInWork;
@@ -179,7 +168,8 @@ public class OpenRequests extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
 
-        switch(view.getId()){
+        switch(view.getId()) {
+
             case R.id.back:
                 startActivity(new Intent(this, ProfileManager.class));
                 break;
@@ -188,7 +178,8 @@ public class OpenRequests extends AppCompatActivity implements View.OnClickListe
                 final TextView showTheRequest = (TextView) findViewById(R.id.showTheRequest);
                 if(requests[0] != null) {
                     showTheRequest.setText("Request from:  " + requests[0].getUserName() + "\n"
-                            + "Movie:  " + requests[0].getMovieName() + "\n");
+                            + "Movie:  " + requests[0].getMovieName() + "\n"
+                            + "This Request Is Closed");
                     requestInWork = requests[0];
                 }
                 break;
@@ -197,7 +188,8 @@ public class OpenRequests extends AppCompatActivity implements View.OnClickListe
                 final TextView showTheRequest2 = (TextView) findViewById(R.id.showTheRequest);
                 if(requests[1] != null) {
                     showTheRequest2.setText("Request from:  " + requests[1].getUserName() + "\n"
-                            + "Movie:  " + requests[1].getMovieName() + "\n");
+                            + "Movie:  " + requests[1].getMovieName() + "\n"
+                            + "This Request Is Closed");
                     requestInWork = requests[1];
                 }
                 break;
@@ -206,7 +198,8 @@ public class OpenRequests extends AppCompatActivity implements View.OnClickListe
                 final TextView showTheRequest3 = (TextView) findViewById(R.id.showTheRequest);
                 if(requests[2] != null) {
                     showTheRequest3.setText("Request from:  " + requests[2].getUserName() + "\n"
-                            + "Movie:  " + requests[2].getMovieName() + "\n");
+                            + "Movie:  " + requests[2].getMovieName() + "\n"
+                            + "This Request Is Closed");
                     requestInWork = requests[2];
                 }
                 break;
@@ -215,7 +208,8 @@ public class OpenRequests extends AppCompatActivity implements View.OnClickListe
                 final TextView showTheRequest4 = (TextView) findViewById(R.id.showTheRequest);
                 if(requests[3] != null) {
                     showTheRequest4.setText("Request from:  " + requests[3].getUserName() + "\n"
-                            + "Movie:  " + requests[3].getMovieName() + "\n");
+                            + "Movie:  " + requests[3].getMovieName() + "\n"
+                            + "This Request Is Closed");
                     requestInWork = requests[3];
                 }
                 break;
@@ -224,7 +218,8 @@ public class OpenRequests extends AppCompatActivity implements View.OnClickListe
                 final TextView showTheRequest5 = (TextView) findViewById(R.id.showTheRequest);
                 if(requests[4] != null) {
                     showTheRequest5.setText("Request from:  " + requests[4].getUserName() + "\n"
-                            + "Movie:  " + requests[4].getMovieName() + "\n");
+                            + "Movie:  " + requests[4].getMovieName() + "\n"
+                            + "This Request Is Closed");
                     requestInWork = requests[4];
                 }
                 break;
@@ -233,24 +228,22 @@ public class OpenRequests extends AppCompatActivity implements View.OnClickListe
                 final TextView showTheRequest6 = (TextView) findViewById(R.id.showTheRequest);
                 if(requests[5] != null) {
                     showTheRequest6.setText("Request from:  " + requests[5].getUserName() + "\n"
-                            + "Movie:  " + requests[5].getMovieName() + "\n");
+                            + "Movie:  " + requests[5].getMovieName() + "\n"
+                            + "This Request Is Closed");
                     requestInWork = requests[5];
                 }
                 break;
 
-            case R.id.close:
+            case R.id.remove:
                 final TextView showTheRequestClosed = (TextView) findViewById(R.id.showTheRequest);
                 showTheRequestClosed.setText("Request from:  " + requestInWork.getUserName() + "\n"
-                            + "For The Movie:  " + requestInWork.getMovieName() + "\n  Is Now Closed");
+                        + "For The Movie:  " + requestInWork.getMovieName() + "\n  Is Now Closed");
                 String closedRequestID = requestInWork.getRequestID();
-                requestInWork.setStatus("CLOSED");
+                //requestInWork.setStatus("CLOSED");
 
-                rootRef.child("Requests").child(closedRequestID).setValue(requestInWork);
-                //rootRef.child("Requests").child(closedRequestID).removeValue();
+                //rootRef.child("Requests").child(closedRequestID).setValue(requestInWork);
+                rootRef.child("Requests").child(closedRequestID).removeValue();
                 break;
-
-
         }
-
     }
 }
