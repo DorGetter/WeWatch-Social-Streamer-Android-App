@@ -108,9 +108,9 @@ public class ManagerMyActivity extends AppCompatActivity implements View.OnClick
                     String status = request.getStatus();
                     String closed_by = request.getClosedBy();
                     String movie_name = request.getMovieName();
+                    String name = request.getUserName();
 
                     /* use for debug */
-                    String name = request.getUserName();
                     requestList = requestList + "\n" + requestLine + name;
 
 
@@ -157,8 +157,6 @@ public class ManagerMyActivity extends AppCompatActivity implements View.OnClick
 
                     if(toINC)
                         text_view_num ++;
-
-
 
 
 

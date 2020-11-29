@@ -102,9 +102,9 @@ public class ClosedRequests extends AppCompatActivity implements View.OnClickLis
                     String requestKey = child.getKey();
                     Request request = child.getValue(Request.class);
                     String status = request.getStatus();
+                    String name = request.getUserName();
 
                     /* use for debug */
-                    String name = request.getUserName();
                     requestList = requestList + "\n" + requestLine + name;
 
 
@@ -145,9 +145,6 @@ public class ClosedRequests extends AppCompatActivity implements View.OnClickLis
 
                     if(toINC)
                         text_view_num ++;
-
-
-
 
 
                 }
