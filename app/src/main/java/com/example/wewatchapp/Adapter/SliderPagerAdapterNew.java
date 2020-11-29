@@ -43,6 +43,9 @@ public class SliderPagerAdapterNew extends PagerAdapter {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                // sending it to VideoplayActivity for display movie!
+
                 String video_url =  mList.get(position).getVideo_url();
                 Intent intent = new Intent(mContext , VideoplayActivity.class);
                 intent.putExtra("videoUri",video_url);

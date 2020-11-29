@@ -97,9 +97,7 @@ public class MovieDetailNewActivity extends AppCompatActivity implements MovieIt
         play_fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                movieViewed();
-                Toast.makeText(MovieDetailNewActivity.this,
-                        "just click fb play button", Toast.LENGTH_SHORT).show();
+//                sending it to VideoplayActivity for display movie!
                 Intent intent = new Intent(MovieDetailNewActivity.this , VideoplayActivity.class);
                 intent.putExtra("videoUri",current_Video_url);
                 intent.putExtra("movieName", movieTitleViews);
@@ -109,25 +107,7 @@ public class MovieDetailNewActivity extends AppCompatActivity implements MovieIt
         });
 
     }
-//
-//
-//    private void movieViewed() {
-//
-//        //String movie = movieName.getText().toString().trim();
-//
-//        Views views = new Views();
-//        views.setMovieName(movieTitleViews);
-//        System.out.println(movieTitleViews);
-//        views.setUserName(userName);
-//        /* set an ID from the database */
-//        views.setViewID(rootRef.push().getKey());
-//        /* insert the movie by its ID */
-//        rootRef.child(views.getViewID()).setValue(views);
-//
-//        Toast.makeText(this, "Thanks   " + userName
-//                + "\nYour view saved...", Toast.LENGTH_LONG).show();
-//
-//    }
+
 
     public void iniViews() {
         // RvCast = findViewById(R.id.rv_cast);
