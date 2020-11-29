@@ -30,13 +30,13 @@ public class RequestForm extends AppCompatActivity implements View.OnClickListen
     private TextView sendRequest;
     private TextView back;
 
-    private EditText movieCategory, movieName, yourName ;
+    private EditText movieName;
     private FirebaseUser user;
     private DatabaseReference reference
             = FirebaseDatabase.getInstance().getReference("Users");
     private TextView action, comedy, drama, adventures;
 
-    private EditText movieName2;
+
 
     /* firebase object */
     FirebaseDatabase database;
