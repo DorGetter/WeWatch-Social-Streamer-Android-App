@@ -34,6 +34,7 @@ public class OpenRequests extends AppCompatActivity implements View.OnClickListe
     private TextView back;
     private TextView open, open2, open3, open4, open5, open6;
     private TextView close;
+    private TextView upload;
 
 
     /* firebase object */
@@ -78,6 +79,9 @@ public class OpenRequests extends AppCompatActivity implements View.OnClickListe
 
         close = findViewById(R.id.close);
         close.setOnClickListener(this);
+
+        upload = findViewById(R.id.uploadMovie);
+        upload.setOnClickListener(this);
 
         open = findViewById(R.id.open);
         open.setOnClickListener(this);
@@ -279,6 +283,10 @@ public class OpenRequests extends AppCompatActivity implements View.OnClickListe
                 //rootRef.child("Requests").child(closedRequestID).removeValue();
                 break;
 
+            case R.id.uploadMovie:
+                Toast.makeText(OpenRequests.this,"upload...",Toast.LENGTH_LONG).show();
+
+                break;
 
         }
 
