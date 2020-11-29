@@ -36,7 +36,7 @@ public class RequestForm extends AppCompatActivity implements View.OnClickListen
             = FirebaseDatabase.getInstance().getReference("Users");
     private TextView action, comedy, drama, adventures;
 
-    private EditText movieName;
+    private EditText movieName2;
 
     /* firebase object */
     FirebaseDatabase database;
@@ -98,7 +98,7 @@ public class RequestForm extends AppCompatActivity implements View.OnClickListen
         rootRef = database.getReference("Requests");
     }
 
-    String movieCategory;
+    String movie_Category;
 
     @Override
     public void onClick(View view) {
@@ -127,22 +127,22 @@ public class RequestForm extends AppCompatActivity implements View.OnClickListen
                 break;
 
             case R.id.action:
-                movieCategory = "ACTION";
+                movie_Category = "ACTION";
                 Toast.makeText(this, "ACTION selected", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.comedy:
-                movieCategory = "COMEDY";
+                movie_Category = "COMEDY";
                 Toast.makeText(this, "COMEDY selected", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.drama:
-                movieCategory = "DRAMA";
+                movie_Category = "DRAMA";
                 Toast.makeText(this, "DRAMA selected", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.adventures:
-                movieCategory = "ADVENTURES";
+                movie_Category = "ADVENTURES";
                 Toast.makeText(this, "ADVENTURES selected", Toast.LENGTH_SHORT).show();
                 break;
         }
@@ -154,7 +154,7 @@ public class RequestForm extends AppCompatActivity implements View.OnClickListen
 
         String movie = movieName.getText().toString().trim();
 
-        Request request = new Request(movieCategory, movie, userName, null);
+        Request request = new Request(movie_Category, movie, userName, null);
 
         /* set an ID from the database */
         request.setRequestID(rootRef.push().getKey());
