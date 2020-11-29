@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -25,6 +26,8 @@ import com.google.android.exoplayer2.upstream.BandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class VideoplayActivity extends AppCompatActivity {
     Uri videoUri;
@@ -32,6 +35,11 @@ public class VideoplayActivity extends AppCompatActivity {
     ExoPlayer exoPlayer ;
     ExtractorsFactory extractorsFactory;
     ImageView exo_floating_widget ;
+    String movieName;
+    String userName;
+    FirebaseDatabase database;
+    DatabaseReference rootRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,8 +49,17 @@ public class VideoplayActivity extends AppCompatActivity {
         playerView = findViewById(R.id.playerView);
         exo_floating_widget = findViewById(R.id.exo_floating_widget);
         Intent intent = getIntent();
+
         if(intent != null ){
             String uri_str = intent.getStringExtra("videoUri");
+            movieName = intent.getStringExtra("movieName");
+            userName = intent.getStringExtra("userID");
+
+            database = FirebaseDatabase.getInstance();
+            rootRef  = database.getReference("Views");
+
+            movieViewed();
+//            Toast.makeText(VideoplayActivity.this, movieName + userName, Toast.LENGTH_LONG ).show();
             videoUri = Uri.parse(uri_str);
         }
         exo_floating_widget.setOnClickListener(new View.OnClickListener() {
@@ -82,6 +99,8 @@ public class VideoplayActivity extends AppCompatActivity {
 
     private void playVideo(){
 
+
+
         try {
             String playerInfo = Util.getUserAgent(this,"MovieAppClient");
             DefaultDataSourceFactory dataSourceFactory = new DefaultDataSourceFactory(this,playerInfo);
@@ -109,5 +128,25 @@ public class VideoplayActivity extends AppCompatActivity {
         super.onBackPressed();
         exoPlayer.setPlayWhenReady(false);
         exoPlayer.release();
+    }
+
+
+
+
+
+    private void movieViewed() {
+
+        Views views = new Views();
+        views.setMovieName(movieName);
+        System.out.println(movieName);
+        views.setUserName(userName);
+        /* set an ID from the database */
+        views.setViewID(rootRef.push().getKey());
+        /* insert the movie by its ID */
+        rootRef.child(views.getViewID()).setValue(views);
+
+        Toast.makeText(this, "Thanks   " + userName
+                + "\nYour view saved...", Toast.LENGTH_LONG).show();
+
     }
 }

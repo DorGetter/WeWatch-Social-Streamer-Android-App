@@ -23,7 +23,7 @@ public class SliderPagerAdapterNew extends PagerAdapter {
 
     private Context mContext ;
     private List<SliderSide> mList ;
-
+    String UserName;
     public SliderPagerAdapterNew(Context mContext, List<SliderSide> mList) {
         this.mContext = mContext;
         this.mList = mList;
@@ -39,14 +39,15 @@ public class SliderPagerAdapterNew extends PagerAdapter {
         Glide.with(mContext).load(mList.get(position).getVideo_thumb()).into(slideImg);
         //slideImg.setImageResource(mList.get(position).getVideo_thumb());
         slideText.setText(mList.get(position).getVideo_name()+"\n"+mList.get(position).getVideo_description());
+        String MovieName = mList.get(position).getVideo_name();
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String video_url =  mList.get(position).getVideo_url();
                 Intent intent = new Intent(mContext , VideoplayActivity.class);
                 intent.putExtra("videoUri",video_url);
-                // Toast.makeText(VideoPlayerActivity.this, ""+arrayListVideos.get(position).getVideo_path(),
-                // Toast.LENGTH_SHORT).show();
+                intent.putExtra("movieName", MovieName);
+                intent.putExtra("userID" , UserName);
                 mContext.startActivity(intent);
 
             }
@@ -68,5 +69,9 @@ public class SliderPagerAdapterNew extends PagerAdapter {
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
         container.removeView((View)object);
+    }
+
+    public void setUserID(String userName) {
+        this.UserName = userName;
     }
 }

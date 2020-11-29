@@ -66,6 +66,9 @@ public class Vod extends AppCompatActivity implements MovieItemClickListenerNew,
 
     ProgressDialog progressDialog;
 
+    String userName;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +83,27 @@ public class Vod extends AppCompatActivity implements MovieItemClickListenerNew,
         SearchBar = (TextView) findViewById(R.id.search);
         SearchBar.setOnClickListener(this);
         user = FirebaseAuth.getInstance().getCurrentUser();
+
+
+
+
+
+
+        ///////////////////////////////////////////
+
+        reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User userProfile    = snapshot.getValue(User.class);
+                if(  userProfile   != null){
+                    userName = userProfile.getFullName(); } }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
+
+        /////////////////////////////////////////////
 
 
         progressDialog = new ProgressDialog(this);
@@ -232,6 +256,12 @@ public class Vod extends AppCompatActivity implements MovieItemClickListenerNew,
     private void iniSlider() {
         //uploadsslider = new ArrayList<>();
         SliderPagerAdapterNew adapterslider = new SliderPagerAdapterNew(this,uploadsslider);
+        adapterslider.setUserID(userName);
+
+
+
+
+
         sliderpager.setAdapter(adapterslider);
         adapterslider.notifyDataSetChanged();
         // setup timer
@@ -250,8 +280,6 @@ public class Vod extends AppCompatActivity implements MovieItemClickListenerNew,
         MoviesRV = findViewById(R.id.Rv_movies);
         moviesRvWeek = findViewById(R.id.rv_movies_week);
         tab = findViewById(R.id.tabrecyler);
-
-
     }
 
 
