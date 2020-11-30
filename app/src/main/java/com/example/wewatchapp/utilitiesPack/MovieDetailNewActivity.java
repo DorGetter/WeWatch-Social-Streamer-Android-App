@@ -2,6 +2,7 @@ package com.example.wewatchapp.utilitiesPack;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.AnimationUtils;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,7 +21,10 @@ import com.example.wewatchapp.Adapter.MoviesShowAdapter;
 import com.example.wewatchapp.Model.GetVideoDetails;
 import com.example.wewatchapp.Model.MovieItemClickListenerNew;
 import com.example.wewatchapp.R;
+import com.example.wewatchapp.userPack.User;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,26 +41,67 @@ public class MovieDetailNewActivity extends AppCompatActivity implements MovieIt
     private RecyclerView RvCast,recycler_similar_movies;
     MoviesShowAdapter moviesShowAdapter;
     DatabaseReference mDatabaserefence ;
+    String movieTitleViews;
     private List<GetVideoDetails> uploads,actionmovies, sportmovies,
             comedymovies,romanticmovies,advanturemovies;;
     String current_Video_url;
     String current_video_category;
+
+    private FirebaseUser user;
+    private DatabaseReference reference
+            = FirebaseDatabase.getInstance().getReference("Users");
+
+    /* firebase object */
+    FirebaseDatabase database;
+    /* firebase reference to the root */
+    DatabaseReference rootRef;
+
+
+    String userName = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail_new);
+
+        //get user info:
+        user = FirebaseAuth.getInstance().getCurrentUser();
+
+        reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User userProfile    = snapshot.getValue(User.class);
+                if(  userProfile   != null){
+                    userName = userProfile.getFullName();
+
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+        /* set the path to requests table */
+        database = FirebaseDatabase.getInstance();
+        rootRef = database.getReference("Views");
+
+
+
+
+
+
         iniViews();
         similarmoviesRecycler();
         similarMovies();
         play_fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MovieDetailNewActivity.this,
-                        "just click fb play button", Toast.LENGTH_SHORT).show();
+//                sending it to VideoplayActivity for display movie!
                 Intent intent = new Intent(MovieDetailNewActivity.this , VideoplayActivity.class);
                 intent.putExtra("videoUri",current_Video_url);
-                // Toast.makeText(VideoPlayerActivity.this, ""+arrayListVideos.get(position).getVideo_path(),
-                // Toast.LENGTH_SHORT).show();
+                intent.putExtra("movieName", movieTitleViews);
+                intent.putExtra("userID" , userName);
                 startActivity(intent);
             }
         });
@@ -63,12 +109,11 @@ public class MovieDetailNewActivity extends AppCompatActivity implements MovieIt
     }
 
 
-
-
     public void iniViews() {
         // RvCast = findViewById(R.id.rv_cast);
         play_fab = findViewById(R.id.play_fab);
         String movieTitle = getIntent().getExtras().getString("title");
+        movieTitleViews = movieTitle;
         String imageResourceId = getIntent().getExtras().getString("imgURL");
         String imagecover = getIntent().getExtras().getString("imgCover");
         String movieDetailText = getIntent().getExtras().getString("movieDetails");
@@ -185,9 +230,9 @@ public class MovieDetailNewActivity extends AppCompatActivity implements MovieIt
 
 
     }
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onMovieClick(GetVideoDetails movie, ImageView movieImageView) {
-
         tv_title.setText(movie.getVideo_name());
         getSupportActionBar().setTitle(movie.getVideo_name());
         Glide.with(this).load(movie.getVideo_thumb()).into(MovieThumbnailImg);

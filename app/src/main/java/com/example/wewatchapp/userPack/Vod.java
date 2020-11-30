@@ -5,12 +5,10 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.graphics.Movie;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.text.method.KeyListener;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -20,14 +18,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.utils.widget.MockView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.wewatchapp.Adapter.MoviesShowAdapter;
 import com.example.wewatchapp.Adapter.SliderPagerAdapterNew;
-import com.example.wewatchapp.Home.MainActivity;
 import com.example.wewatchapp.Model.GetVideoDetails;
 import com.example.wewatchapp.Model.MovieItemClickListenerNew;
 import com.example.wewatchapp.Model.SliderSide;
@@ -70,6 +66,9 @@ public class Vod extends AppCompatActivity implements MovieItemClickListenerNew,
 
     ProgressDialog progressDialog;
 
+    String userName;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,6 +83,27 @@ public class Vod extends AppCompatActivity implements MovieItemClickListenerNew,
         SearchBar = (TextView) findViewById(R.id.search);
         SearchBar.setOnClickListener(this);
         user = FirebaseAuth.getInstance().getCurrentUser();
+
+
+
+
+
+
+        ///////////////////////////////////////////
+
+        reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User userProfile    = snapshot.getValue(User.class);
+                if(  userProfile   != null){
+                    userName = userProfile.getFullName(); } }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
+
+        /////////////////////////////////////////////
 
 
         progressDialog = new ProgressDialog(this);
@@ -236,6 +256,12 @@ public class Vod extends AppCompatActivity implements MovieItemClickListenerNew,
     private void iniSlider() {
         //uploadsslider = new ArrayList<>();
         SliderPagerAdapterNew adapterslider = new SliderPagerAdapterNew(this,uploadsslider);
+        adapterslider.setUserID(userName);
+
+
+
+
+
         sliderpager.setAdapter(adapterslider);
         adapterslider.notifyDataSetChanged();
         // setup timer
@@ -254,8 +280,6 @@ public class Vod extends AppCompatActivity implements MovieItemClickListenerNew,
         MoviesRV = findViewById(R.id.Rv_movies);
         moviesRvWeek = findViewById(R.id.rv_movies_week);
         tab = findViewById(R.id.tabrecyler);
-
-
     }
 
 
