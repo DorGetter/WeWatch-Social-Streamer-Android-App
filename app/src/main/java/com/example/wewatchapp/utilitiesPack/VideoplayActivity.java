@@ -9,6 +9,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.wewatchapp.R;
@@ -26,8 +27,13 @@ import com.google.android.exoplayer2.upstream.BandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
 
 public class VideoplayActivity extends AppCompatActivity {
     Uri videoUri;
@@ -39,6 +45,7 @@ public class VideoplayActivity extends AppCompatActivity {
     String userName;
     FirebaseDatabase database;
     DatabaseReference rootRef;
+    DatabaseReference counterMovieRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +66,7 @@ public class VideoplayActivity extends AppCompatActivity {
             rootRef  = database.getReference("Views");
 
             movieViewed();
+            updateMovieCounter();
 //            Toast.makeText(VideoplayActivity.this, movieName + userName, Toast.LENGTH_LONG ).show();
             videoUri = Uri.parse(uri_str);
         }
@@ -99,8 +107,6 @@ public class VideoplayActivity extends AppCompatActivity {
 
     private void playVideo(){
 
-
-
         try {
             String playerInfo = Util.getUserAgent(this,"MovieAppClient");
             DefaultDataSourceFactory dataSourceFactory = new DefaultDataSourceFactory(this,playerInfo);
@@ -133,6 +139,34 @@ public class VideoplayActivity extends AppCompatActivity {
 
 
 
+
+    private void updateMovieCounter(){
+        counterMovieRef = database.getReference("movie_counter");
+
+        counterMovieRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot child : snapshot.getChildren()){
+                    MovieCounterView MCV = child.getValue(MovieCounterView.class);
+                    if(movieName.compareTo(MCV.getMovie_name()) == 0){
+                        HashMap map = new HashMap();
+                        map.put("counter", MCV.getCounter()+1);
+                        counterMovieRef.child(child.getKey()).updateChildren(map);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+//.addListenerForSingleValueEvent(new ValueEventListener() {
+//
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+    }
 
     private void movieViewed() {
 
