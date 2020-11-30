@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -28,6 +29,7 @@ import com.example.wewatchapp.Model.GetVideoDetails;
 import com.example.wewatchapp.Model.MovieItemClickListenerNew;
 import com.example.wewatchapp.Model.SliderSide;
 import com.example.wewatchapp.R;
+import com.example.wewatchapp.utilitiesPack.MovieCounterView;
 import com.example.wewatchapp.utilitiesPack.MovieDetailNewActivity;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -63,7 +65,7 @@ public class Vod extends AppCompatActivity implements MovieItemClickListenerNew,
     private FirebaseUser user;
     private DatabaseReference reference
             = FirebaseDatabase.getInstance().getReference("Users");;
-
+    DatabaseReference counterViewMoviesRef;
     ProgressDialog progressDialog;
 
     String userName;
@@ -85,6 +87,7 @@ public class Vod extends AppCompatActivity implements MovieItemClickListenerNew,
         user = FirebaseAuth.getInstance().getCurrentUser();
 
 
+        counterViewMoviesRef = FirebaseDatabase.getInstance().getReference().child("movie_counter");
 
 
 
@@ -139,7 +142,7 @@ public class Vod extends AppCompatActivity implements MovieItemClickListenerNew,
         mDatabaserefence.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
+                int i = 0;
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     GetVideoDetails upload = postSnapshot.getValue(GetVideoDetails.class);
                     SliderSide slide = postSnapshot.getValue(SliderSide.class);
@@ -166,6 +169,10 @@ public class Vod extends AppCompatActivity implements MovieItemClickListenerNew,
 
                     if(upload.getVideo_slide().equals("Slide movies")){
                         uploadsslider.add(slide);
+                    }
+                    if(i++ <4 ) {
+                        uploadsListlatest.add(upload);
+                        uploadsListpopular.add(upload);
                     }
                     uploads.add(upload);
 
@@ -194,6 +201,51 @@ public class Vod extends AppCompatActivity implements MovieItemClickListenerNew,
 
     }
     private void iniPopularMovies() {
+
+//        int totalMoviesSize = uploads.size();
+//        System.out.println(totalMoviesSize);
+//        int max = Math.max(4, totalMoviesSize-1);
+//        ArrayList<String> movieNames = new ArrayList<>();
+//        ArrayList<Integer> movieNameCounter = new ArrayList<>();
+//        ArrayList<String> results = new ArrayList<>();
+//
+//        counterViewMoviesRef.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                for(DataSnapshot child : snapshot.getChildren()){
+//                    MovieCounterView MCV = child.getValue(MovieCounterView.class);
+//                    movieNames.add(MCV.getMovie_name());
+//                    movieNameCounter.add(MCV.getCounter());
+//                }
+//            }
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {}
+//        });
+//        int current_max = -1;
+//        int max_index = 0;
+//        for(int i=0; i < movieNames.size(); i++){
+//            for (int j=0; j<movieNames.size(); j++){
+//                if(movieNameCounter.get(j) > current_max){
+//                    max_index = j;
+//                }
+//            }
+//            results.add(movieNames.get(max_index));
+//            if(results.size() == max){
+//                i=movieNames.size();
+//            }
+//            movieNames.remove(max_index);
+//            movieNameCounter.remove(max_index);
+//            current_max = -1;
+//        }
+//
+//        for(GetVideoDetails vd : uploads){
+//            if(vd.getVideo_name().compareTo(results.get(0)) == 0){uploadsListpopular.add(vd);}
+//            if(vd.getVideo_name().compareTo(results.get(1)) == 0){uploadsListpopular.add(vd);}
+//            if(vd.getVideo_name().compareTo(results.get(2)) == 0){uploadsListpopular.add(vd);}
+//            if(vd.getVideo_name().compareTo(results.get(3)) == 0){uploadsListpopular.add(vd);}
+//        }
+
+//        uploadsListpopular.add(uploads.get(0));
         moviesShowAdapter = new MoviesShowAdapter(this, uploadsListpopular,this);
         //adding adapter to recyclerview
         MoviesRV.setAdapter(moviesShowAdapter);
