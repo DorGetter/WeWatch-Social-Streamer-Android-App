@@ -170,8 +170,10 @@ public class Vod extends AppCompatActivity implements MovieItemClickListenerNew,
                     if(upload.getVideo_slide().equals("Slide movies")){
                         uploadsslider.add(slide);
                     }
-                    if(i++ <4 )
+                    if(i++ <4 ) {
                         uploadsListlatest.add(upload);
+                        uploadsListpopular.add(upload);
+                    }
                     uploads.add(upload);
 
                 }
