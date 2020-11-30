@@ -12,6 +12,7 @@
         <activity android:name=".managerPack.ClosedRequests"></activity>
         <activity android:name=".managerPack.OpenRequests" />
         <activity android:name=".userPack.RequestForm" />
+        <activity android:name=".userPack.MyActivity" />
         <activity android:name=".utilitiesPack.VideoplayActivity" />
         <activity android:name=".utilitiesPack.MovieDetailNewActivity" />
         <activity android:name=".userPack.Vod" />
