@@ -21,6 +21,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.wewatchapp.R;
+import com.example.wewatchapp.userPack.Request;
+import com.example.wewatchapp.utilitiesPack.MovieCounterView;
 import com.example.wewatchapp.utilitiesPack.UploadThumnailActivity;
 import com.example.wewatchapp.utilitiesPack.VideoDetailUpload;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -44,6 +46,7 @@ public class UploadMovie extends AppCompatActivity implements AdapterView.OnItem
     StorageReference mStrogeref;
     StorageTask mUploadTask;
     DatabaseReference referenceVideos;
+    DatabaseReference counterViewMoviesRef ;
     EditText video_description;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +59,7 @@ public class UploadMovie extends AppCompatActivity implements AdapterView.OnItem
 
         referenceVideos = FirebaseDatabase.getInstance().getReference().child("videos");
         mStrogeref      = FirebaseStorage.getInstance().getReference().child("videos");
-
+        counterViewMoviesRef = FirebaseDatabase.getInstance().getReference().child("movie_counter");
 
 
         // Spinner element
@@ -114,6 +117,7 @@ public class UploadMovie extends AppCompatActivity implements AdapterView.OnItem
                                             ,"",video_url1
                                             ,video_title, video_description.getText().toString(),movieCategory
                                     );
+                                    EnterMovieToCounterTable(videoDetailUpload.getVideo_name());
 
                                     String uploadId = referenceVideos.push().getKey();
                                     referenceVideos.child(uploadId).setValue(videoDetailUpload);
@@ -254,4 +258,16 @@ public class UploadMovie extends AppCompatActivity implements AdapterView.OnItem
         Toast.makeText(UploadMovie.this,
                 "movies uploaded sucessfully upload movies thumnail", Toast.LENGTH_LONG).show();
     }
+
+
+
+    private void EnterMovieToCounterTable(String movieName){
+        MovieCounterView MCV = new MovieCounterView(null, movieName, 0);
+
+        /* set an ID from the database */
+        MCV.setMovie_counter_view_id(counterViewMoviesRef.push().getKey());
+        /* insert the movie by its ID */
+        counterViewMoviesRef.child(MCV.getMovie_counter_view_id()).setValue(MCV);
+    }
+
 }
