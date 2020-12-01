@@ -9,8 +9,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.Pair;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -41,6 +41,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -112,8 +113,7 @@ public class Vod extends AppCompatActivity implements MovieItemClickListenerNew,
         progressDialog = new ProgressDialog(this);
         iniViews();
         addAllMovies();
-        iniPopularMovies();
-        // iniSlider();
+//        iniPopularMovies();
         iniWeekMovies();
         movieviewtab();
         // getActionMovies();
@@ -172,12 +172,13 @@ public class Vod extends AppCompatActivity implements MovieItemClickListenerNew,
                     }
                     if(i++ <4 ) {
                         uploadsListlatest.add(upload);
-                        uploadsListpopular.add(upload);
                     }
                     uploads.add(upload);
 
                 }
+                System.out.println("upload size in func"+ uploads.size());
                 iniSlider();
+                iniPopularMovies();
                 progressDialog.dismiss();
 
             }
@@ -201,57 +202,85 @@ public class Vod extends AppCompatActivity implements MovieItemClickListenerNew,
 
     }
     private void iniPopularMovies() {
+        System.out.println("iniPopularMovies uploadListPopular list : \n");
+        for (GetVideoDetails VD : uploadsListpopular) {
+            System.out.println(VD.video_name);
+        }
+        getMostPopular();
 
-//        int totalMoviesSize = uploads.size();
-//        System.out.println(totalMoviesSize);
-//        int max = Math.max(4, totalMoviesSize-1);
-//        ArrayList<String> movieNames = new ArrayList<>();
-//        ArrayList<Integer> movieNameCounter = new ArrayList<>();
-//        ArrayList<String> results = new ArrayList<>();
-//
-//        counterViewMoviesRef.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                for(DataSnapshot child : snapshot.getChildren()){
-//                    MovieCounterView MCV = child.getValue(MovieCounterView.class);
-//                    movieNames.add(MCV.getMovie_name());
-//                    movieNameCounter.add(MCV.getCounter());
-//                }
-//            }
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {}
-//        });
-//        int current_max = -1;
-//        int max_index = 0;
-//        for(int i=0; i < movieNames.size(); i++){
-//            for (int j=0; j<movieNames.size(); j++){
-//                if(movieNameCounter.get(j) > current_max){
-//                    max_index = j;
-//                }
-//            }
-//            results.add(movieNames.get(max_index));
-//            if(results.size() == max){
-//                i=movieNames.size();
-//            }
-//            movieNames.remove(max_index);
-//            movieNameCounter.remove(max_index);
-//            current_max = -1;
-//        }
-//
-//        for(GetVideoDetails vd : uploads){
-//            if(vd.getVideo_name().compareTo(results.get(0)) == 0){uploadsListpopular.add(vd);}
-//            if(vd.getVideo_name().compareTo(results.get(1)) == 0){uploadsListpopular.add(vd);}
-//            if(vd.getVideo_name().compareTo(results.get(2)) == 0){uploadsListpopular.add(vd);}
-//            if(vd.getVideo_name().compareTo(results.get(3)) == 0){uploadsListpopular.add(vd);}
-//        }
+        System.out.println("recieving... afterProccessing uploadListPopular list : \n");
 
-//        uploadsListpopular.add(uploads.get(0));
+        for (GetVideoDetails VD : uploadsListpopular) {
+            System.out.println(VD.video_name);
+        }
         moviesShowAdapter = new MoviesShowAdapter(this, uploadsListpopular,this);
         //adding adapter to recyclerview
         MoviesRV.setAdapter(moviesShowAdapter);
         MoviesRV.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
         moviesShowAdapter.notifyDataSetChanged();
 
+
+    }
+    int max;
+    private void getMostPopular() {
+        ArrayList<Pair<String , Integer>> movieNames = new ArrayList<>();
+        System.out.println("-------------------- Most popular movies ------------------------------\n");
+        int totalMoviesSize = uploads.size();
+        System.out.println("number of uploads size : "+totalMoviesSize);
+        max = Math.min(4, totalMoviesSize);
+        System.out.println("number of max : "+totalMoviesSize);
+
+        counterViewMoviesRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot child : snapshot.getChildren()){
+                    MovieCounterView MCV = child.getValue(MovieCounterView.class);
+                    Pair<String, Integer> pair = Pair.create(MCV.getMovie_name(), MCV.getCounter());
+                    movieNames.add(pair);
+                }
+                sendmovieNames(movieNames);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {}
+        });
+    }
+
+    private void sendmovieNames(ArrayList<Pair<String, Integer>> movieNames) {
+
+        System.out.println("getting childrens from MoviecounterView \n");
+        for (Pair p : movieNames){
+            System.out.println("tuple: "+ p.first+", "+p.second );
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            System.out.println("sorting ... ");
+            movieNames.sort((o1, o2) -> o2.second - o1.second);
+            System.out.println("after sorting! ...  \n");
+            for (Pair p : movieNames){
+                System.out.println("tuple: "+ p.first+", "+p.second );
+            }
+        }
+
+        System.out.println("Movie name size : " + movieNames.size() + "max : " + max);
+
+        movieNames.subList(0, max);
+
+        for (int i=0; i < movieNames.size() ; i++){
+            for (int j =0; j < uploads.size() ; j ++) {
+                System.out.println("uploads in :"+j+uploads.get(j).getVideo_name()+" movieNames: "+ i + movieNames.get(i).first);
+                if (uploads.get(j).getVideo_name() == movieNames.get(i).first){
+                    System.out.println("match found");
+                    uploadsListpopular.add(uploads.get(j));
+                    j = uploads.size();
+                }
+            }
+        }
+        System.out.println("Sending... afterProccessing uploadListPopular list : \n");
+
+        for (GetVideoDetails VD : uploadsListpopular) {
+            System.out.println(VD.video_name);
+        }
 
     }
 

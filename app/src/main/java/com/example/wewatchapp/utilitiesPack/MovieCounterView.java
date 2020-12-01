@@ -1,5 +1,7 @@
 package com.example.wewatchapp.utilitiesPack;
 
+import androidx.annotation.Nullable;
+
 public class MovieCounterView {
 
     String movie_counter_view_id, movie_name;
@@ -37,4 +39,5 @@ public class MovieCounterView {
     public void setCounter(int counter) {
         this.counter = counter;
     }
+
 }
