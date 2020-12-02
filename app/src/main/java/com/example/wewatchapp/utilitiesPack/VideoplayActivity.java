@@ -33,6 +33,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Date;
 import java.util.HashMap;
 
 public class VideoplayActivity extends AppCompatActivity {
@@ -174,6 +175,8 @@ public class VideoplayActivity extends AppCompatActivity {
         views.setMovieName(movieName);
         System.out.println(movieName);
         views.setUserName(userName);
+        Date _date = new Date(System.currentTimeMillis());
+        views.setDate(_date);
         /* set an ID from the database */
         views.setViewID(rootRef.push().getKey());
         /* insert the movie by its ID */
