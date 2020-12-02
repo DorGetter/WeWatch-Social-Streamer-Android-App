@@ -68,7 +68,8 @@ public class testing extends AppCompatActivity implements View.OnClickListener {
                     if(views.getUserName().equals(userName)){
                         System.out.println(views.toString());
 
-                        sb += "you watched : " + views.getMovieName() + "\n\n";
+                        sb += "you watched : " + views.getMovieName()  +
+                               "\n" + "on : " + views.getDate() + "\n\n";
 
                     }
                 }
