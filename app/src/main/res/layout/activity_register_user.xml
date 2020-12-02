@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Home.RegisterUser"
-    android:background="@drawable/ac_screen">
+    android:background="@color/colorPrimaryDark">
 
     <ImageView
         android:id="@+id/banner"
@@ -25,6 +25,8 @@
         android:layout_marginTop="10dp"
         android:ems="10"
         android:hint="Full Name"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
         android:inputType="textEmailAddress"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/banner"
@@ -38,6 +40,8 @@
         android:layout_marginTop="10dp"
         android:ems="10"
         android:hint="Age"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
         android:inputType="numberDecimal"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/fullName"
@@ -51,6 +55,8 @@
         android:layout_marginTop="10dp"
         android:ems="10"
         android:hint="email"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
         android:inputType="textEmailAddress"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/age"
@@ -64,6 +70,8 @@
         android:layout_marginTop="10dp"
         android:ems="10"
         android:hint="Password"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
         android:inputType="textPassword"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/email"
