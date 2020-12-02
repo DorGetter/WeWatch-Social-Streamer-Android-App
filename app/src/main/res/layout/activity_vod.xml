@@ -123,12 +123,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:addStatesFromChildren="false"
-            android:background="#E81414"
+            android:background="@color/colorPrimaryDark"
             android:clickable="true"
             android:orientation="vertical"
             android:scrollbarSize="5dp"
             android:text="Search"
             android:textAlignment="viewStart"
+
 
             android:textColor="@color/text_light_blue"
             app:actionViewClass="android.widget.SearchView"
@@ -146,7 +147,9 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:hint="Search " />
+                android:hint="Search "
+                android:textColorHint="@color/white"
+                android:textColor="@color/white"/>
         </SearchView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
