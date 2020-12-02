@@ -63,7 +63,6 @@ public class Views {
                 "movieName='" + movieName + '\'' +
                 ", userName='" + userName + '\'' +
                 ", viewID='" + viewID + '\'' +
-                ", date='" + date + '\'' +
                 '}';
     }
 }

@@ -1,6 +1,5 @@
 package com.example.wewatchapp.userPack;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -92,7 +91,7 @@ public class ProfileUser extends AppCompatActivity implements View.OnClickListen
                 break;
             case R.id.myActivityButton:
 //                startActivity(new Intent(this,MyActivity.class));
-                startActivity(new Intent(this,testing.class));
+                startActivity(new Intent(this, userActivitydisplay.class));
 
                 break;
             case R.id.SendRequests:
