@@ -33,14 +33,15 @@
         android:layout_width="360dp"
         android:layout_height="549dp"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="141dp"
         android:ems="10"
         android:gravity="start|top"
         android:inputType="textMultiLine"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.648" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
