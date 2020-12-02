@@ -452,7 +452,7 @@ public class Vod extends AppCompatActivity implements MovieItemClickListenerNew,
                 }
                 System.out.println("user : "+ userName + "watched :");
                 for ( String s : al) {
-                    System.out.println("name of movie: " + s.toString());
+                    //System.out.println("name of movie: " + s.toString());
                 }
                 // we have all the names of movies the user has been watched..
                 // now go to another func and add to myMovies the movies from updates.

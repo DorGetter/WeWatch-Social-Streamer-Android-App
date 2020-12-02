@@ -9,12 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WeWatchApp">
-        <activity android:name=".userPack.testing"></activity>
+        <activity android:name=".userPack.userActivitydisplay"></activity>
         <activity android:name=".managerPack.ManagerMyActivity" />
         <activity android:name=".managerPack.ClosedRequests" />
         <activity android:name=".managerPack.OpenRequests" />
         <activity android:name=".userPack.RequestForm" />
-        <activity android:name=".userPack.MyActivity" />
         <activity android:name=".utilitiesPack.VideoplayActivity" />
         <activity android:name=".utilitiesPack.MovieDetailNewActivity" />
         <activity android:name=".userPack.Vod" />
