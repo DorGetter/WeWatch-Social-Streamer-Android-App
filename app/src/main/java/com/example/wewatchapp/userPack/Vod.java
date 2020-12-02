@@ -31,6 +31,7 @@ import com.example.wewatchapp.Model.SliderSide;
 import com.example.wewatchapp.R;
 import com.example.wewatchapp.utilitiesPack.MovieCounterView;
 import com.example.wewatchapp.utilitiesPack.MovieDetailNewActivity;
+import com.example.wewatchapp.utilitiesPack.Views;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -51,7 +52,7 @@ public class Vod extends AppCompatActivity implements MovieItemClickListenerNew,
     MoviesShowAdapter moviesShowAdapter;
     DatabaseReference mDatabaserefence ;
     private List<GetVideoDetails> uploads, uploadsListlatest,uploadsListpopular;
-    private List<GetVideoDetails> actionmovies, sportmovies,comedymovies,romanticmovies,advanturemovies;
+    private List<GetVideoDetails> actionmovies, mymovies,comedymovies,romanticmovies,advanturemovies;
 
     private ViewPager sliderpager;
     private List<SliderSide> uploadsslider ;
@@ -67,6 +68,8 @@ public class Vod extends AppCompatActivity implements MovieItemClickListenerNew,
     private DatabaseReference reference
             = FirebaseDatabase.getInstance().getReference("Users");;
     DatabaseReference counterViewMoviesRef;
+    DatabaseReference ViewsTableRef;
+
     ProgressDialog progressDialog;
 
     String userName;
@@ -89,6 +92,7 @@ public class Vod extends AppCompatActivity implements MovieItemClickListenerNew,
 
 
         counterViewMoviesRef = FirebaseDatabase.getInstance().getReference().child("movie_counter");
+        ViewsTableRef = FirebaseDatabase.getInstance().getReference().child("Views");
 
 
 
@@ -128,7 +132,7 @@ public class Vod extends AppCompatActivity implements MovieItemClickListenerNew,
         uploadsListlatest = new ArrayList<>();
         uploadsListpopular = new ArrayList<>();
         actionmovies = new ArrayList<>();
-        sportmovies = new ArrayList<>();
+        mymovies = new ArrayList<>();
         uploadsslider = new ArrayList<>();
         advanturemovies = new ArrayList<>();
         comedymovies = new ArrayList<>();
@@ -156,7 +160,7 @@ public class Vod extends AppCompatActivity implements MovieItemClickListenerNew,
                     if(upload.getVideo_category().equals("Action")){
                         actionmovies.add(upload);
                     }else if(upload.getVideo_category().equals("Sports")){
-                        sportmovies.add(upload);
+                        mymovies.add(upload);
                     }if(upload.getVideo_category().equals("Adventure")){
                         advanturemovies.add(upload);
                     } else if(upload.getVideo_category().equals("Comedy")){
@@ -179,7 +183,6 @@ public class Vod extends AppCompatActivity implements MovieItemClickListenerNew,
                 System.out.println("upload size in func"+ uploads.size());
                 iniSlider();
                 getMostPopular();
-//                iniPopularMovies();
                 progressDialog.dismiss();
 
             }
@@ -203,11 +206,6 @@ public class Vod extends AppCompatActivity implements MovieItemClickListenerNew,
 
     }
     private void iniPopularMovies() {
-//        System.out.println("iniPopularMovies uploadListPopular list : \n");
-//        for (GetVideoDetails VD : uploadsListpopular) {
-//            System.out.println(VD.video_name);
-//        }
-//        getMostPopular();
 
         System.out.println("recieving... afterProccessing uploadListPopular list : \n");
 
@@ -219,8 +217,6 @@ public class Vod extends AppCompatActivity implements MovieItemClickListenerNew,
         MoviesRV.setAdapter(moviesShowAdapter);
         MoviesRV.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
         moviesShowAdapter.notifyDataSetChanged();
-
-
     }
     int max;
     private void getMostPopular() {
@@ -291,7 +287,7 @@ public class Vod extends AppCompatActivity implements MovieItemClickListenerNew,
         tabActionMovies.addTab(tabActionMovies.newTab().setText("Advanture"));
         tabActionMovies.addTab(tabActionMovies.newTab().setText("Comedy"));
         tabActionMovies.addTab(tabActionMovies.newTab().setText("Romantic"));
-        tabActionMovies.addTab(tabActionMovies.newTab().setText("Sports"));
+        tabActionMovies.addTab(tabActionMovies.newTab().setText("My Movies"));                              /// change to my movies from sport
         tabActionMovies.setTabGravity(TabLayout.GRAVITY_FILL);
         tabActionMovies.setTabTextColors(ColorStateList.valueOf(Color.WHITE));
 
@@ -313,7 +309,7 @@ public class Vod extends AppCompatActivity implements MovieItemClickListenerNew,
                         getRomanticMovies();
                         break;
                     case 4:
-                        getSportMovies();
+                        getMyMovies();
                         break;
                 }
 
@@ -437,13 +433,63 @@ public class Vod extends AppCompatActivity implements MovieItemClickListenerNew,
         Toast.makeText(Vod.this, "Tab Action Seleted:", Toast.LENGTH_SHORT).show();
     }
 
-    private void getSportMovies(){
-        moviesShowAdapter = new MoviesShowAdapter(this, sportmovies,this);
+    private void getMyMovies(){
+        mymovies = new ArrayList<>();
+        Toast.makeText(Vod.this, "user name : "+ userName, Toast.LENGTH_LONG).show();
+        // get user
+        // Views userName , movie
+        ArrayList<String> al = new ArrayList<String>();
+        ViewsTableRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot child : snapshot.getChildren()){
+                    Views views = child.getValue(Views.class);
+                    if(views.getUserName().equals(userName)){
+                        if(!al.contains(views.getMovieName())){
+                            al.add(views.getMovieName());
+                        }
+                    }
+                }
+                System.out.println("user : "+ userName + "watched :");
+                for ( String s : al) {
+                    System.out.println("name of movie: " + s.toString());
+                }
+                // we have all the names of movies the user has been watched..
+                // now go to another func and add to myMovies the movies from updates.
+                addToMyMovies(al);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {}
+        });
+
+
+    }
+
+    private void addToMyMovies(ArrayList<String> al) {
+        for (int i=0; i < al.size() ; i++){
+            for (int j =0; j < uploads.size() ; j ++) {
+                System.out.println("uploads in :"+j+uploads.get(j).getVideo_name()+" movieNames: "+ i + al.get(i));
+                if (uploads.get(j).getVideo_name().equals(al.get(i))){
+                    System.out.println("match found");
+                    mymovies.add(uploads.get(j));
+                    j = uploads.size();
+                }
+            }
+        }
+
+
+        System.out.println("before display ---------------------------------------------------------\n" );
+        int i = 0 ;
+        for ( GetVideoDetails GVD : mymovies )
+            System.out.println((i++) + GVD.video_name);
+
+
+
+        moviesShowAdapter = new MoviesShowAdapter(this, mymovies,this);
         //adding adapter to recyclerview
         tab.setAdapter(moviesShowAdapter);
         tab.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
         moviesShowAdapter.notifyDataSetChanged();
-
     }
 
     private void getAdvantureMovies(){
