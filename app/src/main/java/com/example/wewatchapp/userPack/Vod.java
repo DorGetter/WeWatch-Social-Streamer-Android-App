@@ -225,7 +225,6 @@ public class Vod extends AppCompatActivity implements MovieItemClickListenerNew,
     int max;
     private void getMostPopular() {
         ArrayList<Pair<String , Integer>> movieNames = new ArrayList<>();
-        System.out.println("-------------------- Most popular movies ------------------------------\n");
         int totalMoviesSize = uploads.size();
         System.out.println("number of uploads size : "+totalMoviesSize);
         max = Math.min(4, totalMoviesSize);
