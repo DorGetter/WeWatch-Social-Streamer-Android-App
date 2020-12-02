@@ -178,7 +178,8 @@ public class Vod extends AppCompatActivity implements MovieItemClickListenerNew,
                 }
                 System.out.println("upload size in func"+ uploads.size());
                 iniSlider();
-                iniPopularMovies();
+                getMostPopular();
+//                iniPopularMovies();
                 progressDialog.dismiss();
 
             }
@@ -202,11 +203,11 @@ public class Vod extends AppCompatActivity implements MovieItemClickListenerNew,
 
     }
     private void iniPopularMovies() {
-        System.out.println("iniPopularMovies uploadListPopular list : \n");
-        for (GetVideoDetails VD : uploadsListpopular) {
-            System.out.println(VD.video_name);
-        }
-        getMostPopular();
+//        System.out.println("iniPopularMovies uploadListPopular list : \n");
+//        for (GetVideoDetails VD : uploadsListpopular) {
+//            System.out.println(VD.video_name);
+//        }
+//        getMostPopular();
 
         System.out.println("recieving... afterProccessing uploadListPopular list : \n");
 
@@ -269,7 +270,7 @@ public class Vod extends AppCompatActivity implements MovieItemClickListenerNew,
         for (int i=0; i < movieNames.size() ; i++){
             for (int j =0; j < uploads.size() ; j ++) {
                 System.out.println("uploads in :"+j+uploads.get(j).getVideo_name()+" movieNames: "+ i + movieNames.get(i).first);
-                if (uploads.get(j).getVideo_name() == movieNames.get(i).first){
+                if (uploads.get(j).getVideo_name().equals(movieNames.get(i).first)){
                     System.out.println("match found");
                     uploadsListpopular.add(uploads.get(j));
                     j = uploads.size();
@@ -281,6 +282,7 @@ public class Vod extends AppCompatActivity implements MovieItemClickListenerNew,
         for (GetVideoDetails VD : uploadsListpopular) {
             System.out.println(VD.video_name);
         }
+        iniPopularMovies();
 
     }
 
