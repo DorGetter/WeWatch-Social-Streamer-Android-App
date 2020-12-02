@@ -62,7 +62,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="User"
-        android:textColor="@color/white"
+        android:textColor="#196AAD"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/myProfileTxt"
         android:layout_marginTop="36dp"
@@ -75,7 +75,7 @@
         android:layout_marginTop="1dp"
         android:text=""
         android:textStyle="bold"
-        android:textColor="@color/white"
+        android:textColor="#196AAD"
         app:layout_constraintStart_toStartOf="@+id/myProfileTxt"
         app:layout_constraintTop_toBottomOf="@+id/myProfileTxt"
         android:layout_marginLeft="0dp"/>
