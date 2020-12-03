@@ -284,7 +284,8 @@ public class OpenRequests extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.uploadMovie:
-                Toast.makeText(OpenRequests.this,"upload...",Toast.LENGTH_LONG).show();
+                startActivity(new Intent(this,UploadMovie.class));
+                Toast.makeText(OpenRequests.this,"go to upload...",Toast.LENGTH_LONG).show();
                 // send to 'upload movie page'
                 break;
 
