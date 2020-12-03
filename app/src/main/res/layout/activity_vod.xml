@@ -12,15 +12,48 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
+        <SearchView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:addStatesFromChildren="false"
+            android:id="@+id/searchBars"
+            android:background="@color/colorPrimaryDark"
+            android:clickable="true"
+            android:orientation="vertical"
+            android:scrollbarSize="5dp"
+            android:text="Search"
+            android:textAlignment="viewStart"
+            android:textColor="@color/white"
+            app:actionViewClass="android.widget.SearchView"
+            app:layout_constraintBottom_toTopOf="@+id/slider_pager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            app:showAsAction="ifRoom|withText">
+
+            <EditText
+                android:id="@+id/search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="Search "
+                android:textColorHint="@color/white"
+                android:textColor="@color/white"/>
+        </SearchView>
+
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/slider_pager"
             android:layout_width="0dp"
-            android:layout_height="275dp"
-            android:layout_marginTop="44dp"
+            android:layout_height="460dp"
+            android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/searchBars" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/indicator"
@@ -119,38 +152,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tabActionMovies" />
 
-        <SearchView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:addStatesFromChildren="false"
-            android:background="@color/colorPrimaryDark"
-            android:clickable="true"
-            android:orientation="vertical"
-            android:scrollbarSize="5dp"
-            android:text="Search"
-            android:textAlignment="viewStart"
 
-
-            android:textColor="@color/text_light_blue"
-            app:actionViewClass="android.widget.SearchView"
-            app:layout_constraintBottom_toTopOf="@+id/slider_pager"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0"
-            app:showAsAction="ifRoom|withText">
-
-            <EditText
-                android:id="@+id/search"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:hint="Search "
-                android:textColorHint="@color/white"
-                android:textColor="@color/white"/>
-        </SearchView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
