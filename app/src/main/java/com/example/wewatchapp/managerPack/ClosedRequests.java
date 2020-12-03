@@ -236,10 +236,9 @@ public class ClosedRequests extends AppCompatActivity implements View.OnClickLis
                 showTheRequestClosed.setText("Request from:  " + requestInWork.getUserName() + "\n"
                         + "For The Movie:  " + requestInWork.getMovieName() + "\n  Is Now Closed");
                 String closedRequestID = requestInWork.getRequestID();
-                //requestInWork.setStatus("CLOSED");
-
-                //rootRef.child("Requests").child(closedRequestID).setValue(requestInWork);
                 rootRef.child("Requests").child(closedRequestID).removeValue();
+                startActivity(new Intent(this, ClosedRequests.class));
+
                 break;
         }
     }
