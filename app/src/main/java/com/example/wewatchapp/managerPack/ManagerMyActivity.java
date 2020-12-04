@@ -42,7 +42,7 @@ public class ManagerMyActivity extends AppCompatActivity implements View.OnClick
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_testing);
+        setContentView(R.layout.activity_manager_my);
 
         text = (TextView) findViewById(R.id.actualViews);
         manager = FirebaseAuth.getInstance().getCurrentUser();

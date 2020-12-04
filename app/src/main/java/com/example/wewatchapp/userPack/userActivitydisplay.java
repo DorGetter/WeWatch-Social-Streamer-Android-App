@@ -42,7 +42,7 @@ public class userActivitydisplay extends AppCompatActivity implements View.OnCli
 
         text = (TextView) findViewById(R.id.actualViews);
         user = FirebaseAuth.getInstance().getCurrentUser();
-        rootRef = FirebaseDatabase.getInstance().getReference();
+        rootRef = database.getInstance().getReference();
 
 
 
@@ -50,10 +50,6 @@ public class userActivitydisplay extends AppCompatActivity implements View.OnCli
 
 
 
-
-
-
-        //text.setText("");
     }
 
     private void getUserDetails() {
@@ -76,14 +72,14 @@ public class userActivitydisplay extends AppCompatActivity implements View.OnCli
     }
 
     private void showUserViews() {
-        /* database requests listener */
+        /* database views listener */
         rootRef.child("Views").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot child : snapshot.getChildren()){
                     Views views = child.getValue(Views.class);
-                    if(views.getUserName().equals(userName)){
-                        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@2");
+                    if(views.getUserName() != null && (views.getUserName().equals(userName))){
+                        System.out.println(views.toString());
 
                         sb += "you watched : " + views.getMovieName()  +
                                 "\n" + "on : " + views.getDate() + "\n\n";
