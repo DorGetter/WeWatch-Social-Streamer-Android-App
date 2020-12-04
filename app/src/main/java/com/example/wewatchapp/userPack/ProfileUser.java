@@ -92,7 +92,6 @@ public class ProfileUser extends AppCompatActivity implements View.OnClickListen
             case R.id.myActivityButton:
 //                startActivity(new Intent(this,MyActivity.class));
                 startActivity(new Intent(this, userActivitydisplay.class));
-
                 break;
             case R.id.SendRequests:
                 startActivity(new Intent(this,RequestForm.class));
