@@ -1,7 +1,16 @@
 # WeWatch_App
 ### Android OS Movies Player Application
 #
+Stream free movies and TV shows on youre  android devices!
+Watch movies from a selection of new titles, most popular, hidden gems that you may have missed as wekk as youre favorite geners like:
+* Action 
+* Adventure 
+* Comedy 
+* Romantic
+* My Movies
 
+WeWatch is using a realtime database which provides adding new content daily!
+WeWatch allows users to contact the content providers of the app and request the content they are missing for a perfect viewing experience!
 #
 #
 ## Watch Your Favorite Movies From The SmartPhone
