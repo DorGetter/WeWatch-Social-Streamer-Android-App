@@ -2,7 +2,7 @@
 ### Android OS Movies Player Application
 #
 Stream free movies and TV shows on youre  android devices!
-Watch movies from a selection of new titles, most popular, hidden gems that you may have missed as wekk as youre favorite geners like:
+Watch movies from a selection of new titles, most popular, hidden gems that you may have missed as well as youre favorite geners like:
 * Action 
 * Adventure 
 * Comedy 
