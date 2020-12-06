@@ -82,98 +82,80 @@
 
 
     <Button
-        android:id="@+id/FeedButton"
-        android:layout_width="144dp"
-        android:layout_height="99dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="120dp"
-        android:layout_marginBottom="250dp"
-        android:backgroundTint="#196AAD"
-        android:text="Feed"
+        android:id="@+id/MoviesButton"
+        android:layout_width="343dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="120dp"
+        android:backgroundTint="@android:color/background_dark"
+        android:fallbackLineSpacing="true"
+        android:text="V.O.D"
+        android:textColor="#B3043C"
         android:textSize="16dp"
         android:textStyle="bold"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.231"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.364" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <Button
+        android:id="@+id/FriendsButton"
+        android:layout_width="343dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#196AAD"
+        android:text="Friends"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/MoviesButton" />
+
+    <Button
+        android:id="@+id/FeedButton"
+        android:layout_width="343dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#196AAD"
+        android:text="Feed"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/FriendsButton" />
+
 
     <Button
         android:id="@+id/myActivityButton"
-        android:layout_width="144dp"
-        android:layout_height="99dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="120dp"
-        android:layout_marginBottom="250dp"
-        android:backgroundTint="#196AAD"        android:fadingEdge="vertical"
+        android:layout_width="343dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#196AAD"
+        android:fadingEdge="vertical"
         android:text="My Activity"
+        android:textColor="@color/white"
         android:textSize="16dp"
         android:textStyle="bold"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.231"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/FeedButton" />
 
     <Button
         android:id="@+id/SendRequests"
-        android:layout_width="144dp"
-        android:layout_height="99dp"
-        android:layout_marginEnd="20dp"
+        android:layout_width="343dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="20dp"
         android:backgroundTint="#196AAD"
         android:text="Send Request"
         android:textColor="@color/white"
         android:textSize="16dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.538"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.832" />
+        app:layout_constraintTop_toBottomOf="@+id/myActivityButton" />
 
-    <Button
-        android:id="@+id/FriendsButton"
-        android:layout_width="144dp"
-        android:layout_height="99dp"
-        android:layout_marginStart="120dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="250dp"
-        android:text="Friends"
-        android:textStyle="bold"
-        android:textSize="16dp"
-        android:backgroundTint="#196AAD"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.891"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.364" />
 
-    <Button
-        android:id="@+id/MoviesButton"
-        android:layout_width="144dp"
-        android:layout_height="99dp"
-        android:layout_marginStart="120dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="250dp"
-        android:text="Movies Library"
-        android:textSize="16dp"
-        android:textStyle="bold"
-        android:textColor="@color/white"
-        android:backgroundTint="#196AAD"
-        android:fallbackLineSpacing="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.897"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
