@@ -34,7 +34,7 @@ public class RequestForm extends AppCompatActivity implements View.OnClickListen
     private FirebaseUser user;
     private DatabaseReference reference
             = FirebaseDatabase.getInstance().getReference("Users");
-    private TextView action, comedy, drama, adventures;
+    //private TextView action, comedy, drama, adventures;
 
 
 
@@ -76,17 +76,6 @@ public class RequestForm extends AppCompatActivity implements View.OnClickListen
         back = findViewById(R.id.back);
         back.setOnClickListener(this);
 
-        action = findViewById(R.id.action);
-        action.setOnClickListener(this);
-
-        comedy = findViewById(R.id.comedy);
-        comedy.setOnClickListener(this);
-
-        drama = findViewById(R.id.drama);
-        drama.setOnClickListener(this);
-
-        adventures = findViewById(R.id.adventures);
-        adventures.setOnClickListener(this);
 
         movieName = (EditText) findViewById(R.id.movieName);
 
@@ -126,25 +115,6 @@ public class RequestForm extends AppCompatActivity implements View.OnClickListen
 
                 break;
 
-            case R.id.action:
-                movie_Category = "ACTION";
-                Toast.makeText(this, "ACTION selected", Toast.LENGTH_SHORT).show();
-                break;
-
-            case R.id.comedy:
-                movie_Category = "COMEDY";
-                Toast.makeText(this, "COMEDY selected", Toast.LENGTH_SHORT).show();
-                break;
-
-            case R.id.drama:
-                movie_Category = "DRAMA";
-                Toast.makeText(this, "DRAMA selected", Toast.LENGTH_SHORT).show();
-                break;
-
-            case R.id.adventures:
-                movie_Category = "ADVENTURES";
-                Toast.makeText(this, "ADVENTURES selected", Toast.LENGTH_SHORT).show();
-                break;
         }
 
     }
@@ -154,7 +124,19 @@ public class RequestForm extends AppCompatActivity implements View.OnClickListen
 
         String movie = movieName.getText().toString().trim();
 
-        Request request = new Request(movie_Category, movie, userName, null);
+        if(movie.isEmpty()) {
+            movieName.setError("movie name is required!");
+            movieName.requestFocus();
+            return;
+        }
+
+        if(movie.length() < 3){
+            movieName.setError("Min movie name should be 3 characters!");
+            movieName.requestFocus();
+            return;
+        }
+
+        Request request = new Request("", movie, userName, null);
 
         /* set an ID from the database */
         request.setRequestID(rootRef.push().getKey());
@@ -164,5 +146,6 @@ public class RequestForm extends AppCompatActivity implements View.OnClickListen
         Toast.makeText(this, "Thanks   " + userName
                 + "\nYour Request sent...", Toast.LENGTH_LONG).show();
 
+        movieName.setText("");
     }
 }

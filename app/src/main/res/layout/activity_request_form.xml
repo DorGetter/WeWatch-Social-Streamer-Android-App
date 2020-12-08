@@ -18,90 +18,21 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <Button
-        android:id="@+id/action"
-        android:layout_width="168dp"
-        android:layout_height="43dp"
-        android:backgroundTint="#196AAD"
-        android:text="Action"
-        android:textColor="#ffffff"
-        android:textSize="16dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.093"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/banner"
-        app:layout_constraintVertical_bias="0.206" />
-
-    <Button
-        android:id="@+id/drama"
-        android:layout_width="168dp"
-        android:layout_height="43dp"
-        android:backgroundTint="#196AAD"
-        android:text="Drama"
-        android:textColor="#ffffff"
-        android:textSize="16dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.888"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/banner"
-        app:layout_constraintVertical_bias="0.206" />
-
-
-    <Button
-        android:id="@+id/comedy"
-        android:layout_width="168dp"
-        android:layout_height="43dp"
-        android:backgroundTint="#196AAD"
-        android:text="Comedy"
-        android:textColor="#ffffff"
-        android:textSize="16dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.09"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/banner"
-        app:layout_constraintVertical_bias="0.287" />
-
-    <Button
-        android:id="@+id/adventures"
-        android:layout_width="168dp"
-        android:layout_height="43dp"
-        android:backgroundTint="#196AAD"
-        android:text="Adventures"
-        android:textColor="#ffffff"
-        android:textSize="16dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.888"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/banner"
-        app:layout_constraintVertical_bias="0.287" />
-
     <EditText
         android:id="@+id/movieName"
-        android:layout_width="358dp"
-        android:layout_height="36dp"
+        android:layout_width="348dp"
+        android:layout_height="85dp"
         android:layout_marginTop="240dp"
         android:ems="10"
         android:hint="Movie Name"
         android:inputType="textEmailAddress"
-        android:textSize="16sp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/banner"
-        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintHorizontal_bias="0.46"
         app:layout_constraintStart_toStartOf="@+id/banner"
         app:layout_constraintTop_toBottomOf="@+id/banner"
-        app:layout_constraintVertical_bias="0.005" />
-
-
-
-
+        app:layout_constraintVertical_bias="0.371" />
 
     <Button
         android:id="@+id/sendRequest"
@@ -137,25 +68,28 @@
 
     <TextView
         android:id="@+id/textRequest"
-        android:layout_width="319dp"
-        android:layout_height="43dp"
+        android:layout_width="345dp"
+        android:layout_height="90dp"
         android:fontFamily="sans-serif-black"
-        android:text="    Send Request For Your Favorite Movies"
+        android:text="Send Request For Your Favorite Movies"
         android:textColor="#196AAD"
-        android:textSize="16dp"
+        android:textSize="24dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/banner"
-        app:layout_constraintVertical_bias="0.019" />
+        app:layout_constraintVertical_bias="0.151" />
 
     <TextView
-        android:id="@+id/chooseCategory"
-        android:layout_width="315dp"
-        android:layout_height="34dp"
+        android:id="@+id/msg"
+        android:layout_width="340dp"
+        android:layout_height="104dp"
         android:fontFamily="sans-serif-black"
-        android:text="Choose Category:"
+        android:text="let us know if you have not found the movie
+                    you interested in on the movie library
+                    and we will make sure it will be available
+                    as soon as possible   :)"
         android:textColor="#196AAD"
         android:textSize="16dp"
         android:textStyle="bold"
@@ -163,7 +97,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/banner"
-        app:layout_constraintVertical_bias="0.131" />
+        app:layout_constraintVertical_bias="0.365" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
