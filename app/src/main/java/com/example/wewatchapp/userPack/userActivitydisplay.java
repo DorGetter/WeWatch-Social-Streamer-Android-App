@@ -24,14 +24,18 @@ public class userActivitydisplay extends AppCompatActivity implements View.OnCli
     /* firebase reference to the root */
     DatabaseReference rootRef;
 
+    /* reference to users in firebase */
     private FirebaseUser user;
     private DatabaseReference reference
             = FirebaseDatabase.getInstance().getReference("Users");
 
+    /* use to store the current user name */
     String userName = "";
 
+    /* show the activity on the page */
     TextView text ;
 
+    /* use as a string buffer for activities */
     String sb = "";
 
 
@@ -41,7 +45,10 @@ public class userActivitydisplay extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_testing);
 
         text = (TextView) findViewById(R.id.actualViews);
+
+        /* get the current user */
         user = FirebaseAuth.getInstance().getCurrentUser();
+
         rootRef = database.getInstance().getReference();
 
 
@@ -52,6 +59,7 @@ public class userActivitydisplay extends AppCompatActivity implements View.OnCli
 
     }
 
+    /* get the current user data from firebase */
     private void getUserDetails() {
 
         reference.child(user.getUid()).addValueEventListener(new ValueEventListener() {
@@ -60,6 +68,7 @@ public class userActivitydisplay extends AppCompatActivity implements View.OnCli
                 User userProfile    = snapshot.getValue(User.class);
                 if(  userProfile   != null){
                     userName = userProfile.getFullName();
+
                     showUserViews();
                 }
             }
@@ -71,6 +80,7 @@ public class userActivitydisplay extends AppCompatActivity implements View.OnCli
 
     }
 
+    /* get form firebase the current user views */
     private void showUserViews() {
         /* database views listener */
         rootRef.child("Views").addValueEventListener(new ValueEventListener() {
@@ -84,6 +94,7 @@ public class userActivitydisplay extends AppCompatActivity implements View.OnCli
                         sb += "you watched : " + views.getMovieName()  +
                                 "\n" + "on : " + views.getDate() + "\n\n";
 
+                        /* use for debug */
                         System.out.println(sb);
 
                     }

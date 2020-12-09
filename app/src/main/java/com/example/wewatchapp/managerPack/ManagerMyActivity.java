@@ -28,14 +28,18 @@ public class ManagerMyActivity extends AppCompatActivity implements View.OnClick
     /* firebase reference to the root */
     DatabaseReference rootRef;
 
+    /* reference to managers in firebase */
     private FirebaseUser manager;
     private DatabaseReference reference
             = FirebaseDatabase.getInstance().getReference("Managers");
 
+    /* use to store the current manager name */
     String managerName = "";
 
+    /* show the activity on the page */
     TextView text ;
 
+    /* use as a string buffer */
     String sb = "";
 
 
@@ -45,7 +49,10 @@ public class ManagerMyActivity extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_manager_my);
 
         text = (TextView) findViewById(R.id.actualViews);
+
+        /* set the reference to the current manager */
         manager = FirebaseAuth.getInstance().getCurrentUser();
+
         rootRef = FirebaseDatabase.getInstance().getReference();
 
 
@@ -56,6 +63,7 @@ public class ManagerMyActivity extends AppCompatActivity implements View.OnClick
 
     }
 
+    /* get the current manager data from firebase */
     private void getManagerDetails() {
 
         reference.child(manager.getUid()).addValueEventListener(new ValueEventListener() {
@@ -64,6 +72,7 @@ public class ManagerMyActivity extends AppCompatActivity implements View.OnClick
                 UserManager managerProfile    = snapshot.getValue(UserManager.class);
                 if(managerProfile != null){
                     managerName = managerProfile.getFullName();
+
                     showManagerRequests();
                 }
             }
@@ -75,6 +84,7 @@ public class ManagerMyActivity extends AppCompatActivity implements View.OnClick
 
     }
 
+    /* show the requests the current manager has close */
     private void showManagerRequests() {
         /* database requests listener */
         rootRef.child("Requests").addValueEventListener(new ValueEventListener() {
@@ -86,10 +96,12 @@ public class ManagerMyActivity extends AppCompatActivity implements View.OnClick
                         sb += "You Closed Request from :  " + request.getUserName()  +
                                 "\n" + "For The Movie :  " + request.getMovieName() + "\n\n";
 
+                        /* use for debug */
                         System.out.println(sb);
 
                     }
                 }
+                /* show the activities on the page */
                 text.setText(sb);
             }
 

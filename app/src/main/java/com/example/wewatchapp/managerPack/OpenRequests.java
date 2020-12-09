@@ -45,9 +45,11 @@ public class OpenRequests extends AppCompatActivity implements View.OnClickListe
     /* use to store requests from firebase */
     final Request[] requests = new Request[6];
 
+    /* reference to the managers in firebase */
     private FirebaseUser manager;
     final private DatabaseReference referenceManager= FirebaseDatabase.getInstance().getReference("Managers");
 
+    /* use to store the current manager name */
     String managerName = "";
 
     @Override
@@ -129,7 +131,7 @@ public class OpenRequests extends AppCompatActivity implements View.OnClickListe
                 /* use for switch case to insert each request to correct number of text view */
                 int text_view_num = 1;
 
-                /* use for increment the 'text view num' only if the request is 'CLOSED' */
+                /* use for increment the 'text view num' only if the request is 'OPEN' */
                 boolean toINC = false;
 
                 for (DataSnapshot child : snapshot.getChildren()) {
@@ -275,12 +277,12 @@ public class OpenRequests extends AppCompatActivity implements View.OnClickListe
                             + "For The Movie:  " + requestInWork.getMovieName() + "\n  Is Now Closed");
                 String closedRequestID = requestInWork.getRequestID();
 
+                /* set the request status to closed and who closed it */
                 requestInWork.setStatus("CLOSED");
                 requestInWork.setClosedBy(managerName);
 
                 rootRef.child("Requests").child(closedRequestID).setValue(requestInWork);
 
-                //rootRef.child("Requests").child(closedRequestID).removeValue();
                 break;
 
             case R.id.uploadMovie:
