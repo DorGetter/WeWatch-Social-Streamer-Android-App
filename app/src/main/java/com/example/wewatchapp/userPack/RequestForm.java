@@ -26,15 +26,18 @@ import com.google.firebase.database.ValueEventListener;
 
 public class RequestForm extends AppCompatActivity implements View.OnClickListener{
 
-
+    /* buttons */
     private TextView sendRequest;
     private TextView back;
 
+    /* edit text for movie name */
     private EditText movieName;
+
+    /* user reference from firebase */
     private FirebaseUser user;
     private DatabaseReference reference
             = FirebaseDatabase.getInstance().getReference("Users");
-    //private TextView action, comedy, drama, adventures;
+
 
 
 
@@ -43,7 +46,7 @@ public class RequestForm extends AppCompatActivity implements View.OnClickListen
     /* firebase reference to the root */
     DatabaseReference rootRef;
 
-
+    /* string to store user name */
     String userName = "";
 
     @Override
@@ -51,8 +54,10 @@ public class RequestForm extends AppCompatActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_form);
 
+        /* get the current user from fire base auth */
         user = FirebaseAuth.getInstance().getCurrentUser();
 
+        /* store the current user name */
         reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -68,18 +73,14 @@ public class RequestForm extends AppCompatActivity implements View.OnClickListen
             }
         });
 
+        /* initialize buttons and text on the page */
         sendRequest = findViewById(R.id.sendRequest);
         sendRequest.setOnClickListener(this);
-
-        user = FirebaseAuth.getInstance().getCurrentUser();
 
         back = findViewById(R.id.back);
         back.setOnClickListener(this);
 
-
         movieName = (EditText) findViewById(R.id.movieName);
-
-
 
 
         /* set the path to requests table */
@@ -87,7 +88,6 @@ public class RequestForm extends AppCompatActivity implements View.OnClickListen
         rootRef = database.getReference("Requests");
     }
 
-    String movie_Category;
 
     @Override
     public void onClick(View view) {
@@ -98,21 +98,9 @@ public class RequestForm extends AppCompatActivity implements View.OnClickListen
                 break;
 
             case R.id.sendRequest:
+
+                /* call send movie request function */
                 sendMovieRequest();
-                reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        User userProfile    = snapshot.getValue(User.class);
-                        if(  userProfile   != null){
-                            userProfile.Logit("Requested "+movieName.toString());
-                        }
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-
                 break;
 
         }
@@ -122,8 +110,10 @@ public class RequestForm extends AppCompatActivity implements View.OnClickListen
     /* on clicking the 'send request' button this function will send the request to firebase */
     private void sendMovieRequest() {
 
+        /* get the movie name the user typed */
         String movie = movieName.getText().toString().trim();
 
+        /* check correct input */
         if(movie.isEmpty()) {
             movieName.setError("movie name is required!");
             movieName.requestFocus();
@@ -136,6 +126,7 @@ public class RequestForm extends AppCompatActivity implements View.OnClickListen
             return;
         }
 
+        /* create new request object */
         Request request = new Request("", movie, userName, null);
 
         /* set an ID from the database */
@@ -146,6 +137,7 @@ public class RequestForm extends AppCompatActivity implements View.OnClickListen
         Toast.makeText(this, "Thanks   " + userName
                 + "\nYour Request sent...", Toast.LENGTH_LONG).show();
 
+        /* clear the movie name edit text when the request sent */
         movieName.setText("");
     }
 }
