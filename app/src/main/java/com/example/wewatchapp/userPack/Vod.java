@@ -287,7 +287,7 @@ public class Vod extends AppCompatActivity implements MovieItemClickListenerNew,
         tabActionMovies.addTab(tabActionMovies.newTab().setText("Advanture"));
         tabActionMovies.addTab(tabActionMovies.newTab().setText("Comedy"));
         tabActionMovies.addTab(tabActionMovies.newTab().setText("Romantic"));
-        tabActionMovies.addTab(tabActionMovies.newTab().setText("My Movies"));                              /// change to my movies from sport
+        tabActionMovies.addTab(tabActionMovies.newTab().setText("My Movies"));
         tabActionMovies.setTabGravity(TabLayout.GRAVITY_FILL);
         tabActionMovies.setTabTextColors(ColorStateList.valueOf(Color.WHITE));
 

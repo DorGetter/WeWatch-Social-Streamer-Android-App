@@ -134,7 +134,7 @@ public class RegisterManager extends AppCompatActivity implements View.OnClickLi
                                     if(task.isSuccessful()) {
                                         Manager.sendEmailVerification();
                                         Toast.makeText(RegisterManager.this,"Manager has been registered successfully! check your email to verify your account",Toast.LENGTH_LONG).show();
-                                        // startActivity(new Intent(RegisterManager.this, MainActivity.class));
+                                        returnToMain();
                                     }else{
                                         Toast.makeText(RegisterManager.this,
                                                 "Failed to registered! Try again!",
@@ -151,5 +151,9 @@ public class RegisterManager extends AppCompatActivity implements View.OnClickLi
                     }
                 });
 
+    }
+
+    private void returnToMain() {
+        startActivity(new Intent(RegisterManager.this, MainActivity.class));
     }
 }

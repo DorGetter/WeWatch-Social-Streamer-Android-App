@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.wewatchapp.R;
+import com.example.wewatchapp.managerPack.ProfileManager;
 import com.example.wewatchapp.userPack.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -20,6 +21,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.nio.channels.FileChannel;
 
 public class RegisterUser extends AppCompatActivity implements View.OnClickListener{
 
@@ -116,7 +119,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
         }
 
 
-
+        // create new Authentication
         mAuth.createUserWithEmailAndPassword(email,password).
                 addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -128,6 +131,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                             FirebaseDatabase.getInstance().getReference("Users")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                     .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        //if you able to set the new user object to Firebase.
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -137,6 +141,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                                         user.sendEmailVerification();
                                         Toast.makeText(RegisterUser.this,"User has been registered successfully! check your email to verify your account",Toast.LENGTH_LONG).show();
                                         //redirect to login layout
+                                        returnToMain();
 
                                     }else{
                                         Toast.makeText(RegisterUser.this,
@@ -154,5 +159,9 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                     }
                 });
 
+    }
+
+    private void returnToMain() {
+        startActivity(new Intent(RegisterUser.this, MainActivity.class));
     }
 }
