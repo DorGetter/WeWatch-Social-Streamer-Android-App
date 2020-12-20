@@ -101,8 +101,6 @@ public class RequestForm extends AppCompatActivity implements View.OnClickListen
 
                 /* call send movie request function */
                 sendMovieRequest();
-                /* show a dialog */
-                openDialog();
                 break;
 
         }
@@ -150,5 +148,8 @@ public class RequestForm extends AppCompatActivity implements View.OnClickListen
 
         /* clear the movie name edit text when the request sent */
         movieName.setText("");
+
+        /* open dialog */
+        openDialog();
     }
 }
