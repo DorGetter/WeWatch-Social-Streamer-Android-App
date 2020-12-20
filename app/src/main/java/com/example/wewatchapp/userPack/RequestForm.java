@@ -101,11 +101,22 @@ public class RequestForm extends AppCompatActivity implements View.OnClickListen
 
                 /* call send movie request function */
                 sendMovieRequest();
+                /* show a dialog */
+                openDialog();
                 break;
 
         }
 
     }
+
+    /* open new dialog */
+    public void openDialog(){
+
+        Dialog dialog = new Dialog();
+        dialog.show(getSupportFragmentManager(), "dialog");
+
+    }
+
 
     /* on clicking the 'send request' button this function will send the request to firebase */
     private void sendMovieRequest() {
