@@ -20,10 +20,20 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class ProfileUser extends AppCompatActivity implements View.OnClickListener {
     private FirebaseUser user;
     private DatabaseReference reference
             = FirebaseDatabase.getInstance().getReference("Users");
+
+    /* firebase object */
+    FirebaseDatabase database;
+    /* firebase reference to the root */
+    DatabaseReference rootRef;
+
+    /* list to store all the users names from firebase */
+    ArrayList<String> usersList = new ArrayList<>();
 
     Button moviesLibButton,feedButton,FriendsButton,myActivityButton,logOut,sendRequest;
 
@@ -31,6 +41,13 @@ public class ProfileUser extends AppCompatActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_user);
+
+        /* init the firebase reference */
+        rootRef = FirebaseDatabase.getInstance().getReference();
+
+        /* call the function to get all the users name in to usersList */
+        getFriends();
+
 
         //initializing objects.
         user                            = FirebaseAuth.getInstance().getCurrentUser();
@@ -73,6 +90,32 @@ public class ProfileUser extends AppCompatActivity implements View.OnClickListen
 
     }
 
+
+    /* get the users names form firebase in to usersList */
+    public void getFriends(){
+
+        /* database users listener */
+        rootRef.child("Users").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot child : snapshot.getChildren()){
+                    User user = child.getValue(User.class);
+                    usersList.add(user.getFullName());
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+    }
+
+
     /**
      * switch case for buttons.
      * @param view - current view
@@ -85,6 +128,8 @@ public class ProfileUser extends AppCompatActivity implements View.OnClickListen
 //                startActivity(new Intent(this,Feed.class));
                 break;
             case R.id.FriendsButton:
+                /* send to 'Friends' activity list of users names by intent */
+                startActivity(new Intent(this, Friends.class).putStringArrayListExtra("test", (ArrayList<String>) usersList));
                 break;
             case R.id.MoviesButton:
                 startActivity(new Intent(this,Vod.class));
