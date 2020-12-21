@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_wewatch_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WeWatchApp">
-        <activity android:name=".userPack.userActivitydisplay"></activity>
+        <activity android:name=".userPack.Friends"></activity>
+        <activity android:name=".userPack.userActivitydisplay" />
         <activity android:name=".managerPack.ManagerMyActivity" />
         <activity android:name=".managerPack.ClosedRequests" />
         <activity android:name=".managerPack.OpenRequests" />
