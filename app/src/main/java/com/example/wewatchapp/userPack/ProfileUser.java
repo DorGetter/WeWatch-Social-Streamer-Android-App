@@ -32,6 +32,11 @@ public class ProfileUser extends AppCompatActivity implements View.OnClickListen
     /* firebase reference to the root */
     DatabaseReference rootRef;
 
+    /* current user name */
+    String current_name;
+
+
+
     /* list to store all the users names from firebase */
     ArrayList<String> usersList = new ArrayList<>();
 
@@ -44,6 +49,10 @@ public class ProfileUser extends AppCompatActivity implements View.OnClickListen
 
         /* init the firebase reference */
         rootRef = FirebaseDatabase.getInstance().getReference();
+
+
+
+
 
         /* call the function to get all the users name in to usersList */
         getFriends();
@@ -78,6 +87,7 @@ public class ProfileUser extends AppCompatActivity implements View.OnClickListen
                 if(  userProfile   != null){
                     String fullName = userProfile.getFullName();
                     greetingTextView.setText("Hello "+ fullName);
+                    current_name = fullName;
                 }
             }
             @Override
@@ -116,6 +126,8 @@ public class ProfileUser extends AppCompatActivity implements View.OnClickListen
     }
 
 
+
+
     /**
      * switch case for buttons.
      * @param view - current view
@@ -128,8 +140,11 @@ public class ProfileUser extends AppCompatActivity implements View.OnClickListen
 //                startActivity(new Intent(this,Feed.class));
                 break;
             case R.id.FriendsButton:
-                /* send to 'Friends' activity list of users names by intent */
-                startActivity(new Intent(this, Friends.class).putStringArrayListExtra("test", (ArrayList<String>) usersList));
+                /* send to 'Friends' activity list of users names and current user name by intent */
+
+                startActivity(new Intent(this, Friends.class).putStringArrayListExtra("test", (ArrayList<String>) usersList)
+                            .putExtra("user name", current_name));
+
                 break;
             case R.id.MoviesButton:
                 startActivity(new Intent(this,Vod.class));

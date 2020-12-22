@@ -40,6 +40,9 @@ public class Friends extends AppCompatActivity {
     /* list to store the users names get from the intent */
     ArrayList<String> usersNames = new ArrayList<>();
 
+    /* the current profile user name */
+    String current_user_name;
+
 
 
     @Override
@@ -47,17 +50,24 @@ public class Friends extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends);
 
-        rootRef = FirebaseDatabase.getInstance().getReference();
 
         listView = (ListView)findViewById(R.id.listView);
+
+        /* set the path to friends table */
+        database = FirebaseDatabase.getInstance();
+        rootRef = database.getReference("Friends");
+
 
         /* get the names from the intent in to the names list */
         usersNames  = getIntent().getStringArrayListExtra("test");
 
+        /* get the current user name from the intent */
+        current_user_name = getIntent().getStringExtra("user name");
+
         /* add the names from the names list into the 'list view' */
         for(int i = 0; i < usersNames .size(); i++) {
-
-            list.add("" + usersNames .get(i));
+            if(usersNames.get(i).compareTo(current_user_name) != 0)
+                list.add("" + usersNames .get(i));
         }
 
 
@@ -71,6 +81,19 @@ public class Friends extends AppCompatActivity {
 
                 Toast.makeText(getApplicationContext(), "You add  " + adapter.getItem(position)
                         + "  To Your Friends!", Toast.LENGTH_LONG).show();
+
+                /* get the friend name which typed */
+                String newFriend = "" + adapter.getItem(position);
+
+                /* create new friend object */
+                Friends_List friend = new Friends_List(newFriend, null);
+
+                /* get id to the friend from fire base (in the path to the current user) */
+                friend.setId(rootRef.child(current_user_name).push().getKey());
+
+                /* add the new friend in the current user path*/
+                rootRef.child(current_user_name).child(friend.getId()).setValue(friend);
+
 
             }
         });
