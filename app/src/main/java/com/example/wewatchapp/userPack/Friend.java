@@ -3,17 +3,17 @@ package com.example.wewatchapp.userPack;
 import java.util.ArrayList;
 
 /* this class represents a friend object which can be add to (user friends 'list') */
-public class Friends_List {
+public class Friend {
 
     private String name;
     private String id;
 
 
-    public Friends_List() {
+    public Friend() {
 
     }
 
-    public Friends_List(String name_, String id_) {
+    public Friend(String name_, String id_) {
         this.name = name_;
         this.id = id_;
 

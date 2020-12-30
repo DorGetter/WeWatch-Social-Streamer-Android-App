@@ -43,6 +43,9 @@ public class Friends extends AppCompatActivity {
     /* the current profile user name */
     String current_user_name;
 
+    /* list to store my friends names from firebase */
+    ArrayList<String> myFriends = new ArrayList<>();
+
 
 
     @Override
@@ -57,12 +60,53 @@ public class Friends extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         rootRef = database.getReference("Friends");
 
-
         /* get the names from the intent in to the names list */
-        usersNames  = getIntent().getStringArrayListExtra("test");
+        usersNames = getIntent().getStringArrayListExtra("test");
 
         /* get the current user name from the intent */
         current_user_name = getIntent().getStringExtra("user name");
+
+        /*initialized my friends list   */
+        initMyFriendsL();
+
+    }
+
+    /* get my friends names from firebse */
+    private void initMyFriendsL() {
+
+        rootRef.child(current_user_name).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                for (DataSnapshot child : snapshot.getChildren()){
+
+                    Friend friend = child.getValue(Friend.class);
+                    String name = friend.getName();
+                    myFriends.add(name);
+                }
+                //System.out.println(" >>>>>>> "+myFriends.toString());
+
+                /* create the updated scroll view */
+                CreateScrollView();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
+
+    /* create updated scroll view of optional new friends */
+    private void CreateScrollView() {
+
+        /* remove my friends names from the search friends menu  */
+        for(String name : myFriends){
+            if(usersNames.contains(name))
+                usersNames.remove(name);
+        }
+
 
         /* add the names from the names list into the 'list view' */
         for(int i = 0; i < usersNames .size(); i++) {
@@ -70,7 +114,10 @@ public class Friends extends AppCompatActivity {
                 list.add("" + usersNames .get(i));
         }
 
+        initScrollView();
+    }
 
+    private void initScrollView() {
         adapter = new ArrayAdapter<>(Friends.this, android.R.layout.simple_list_item_1, list);
 
         listView.setAdapter(adapter);
@@ -86,7 +133,7 @@ public class Friends extends AppCompatActivity {
                 String newFriend = "" + adapter.getItem(position);
 
                 /* create new friend object */
-                Friends_List friend = new Friends_List(newFriend, null);
+                Friend friend = new Friend(newFriend, null);
 
                 /* get id to the friend from fire base (in the path to the current user) */
                 friend.setId(rootRef.child(current_user_name).push().getKey());
@@ -97,10 +144,7 @@ public class Friends extends AppCompatActivity {
 
             }
         });
-
     }
-
-
 
 
     @Override
