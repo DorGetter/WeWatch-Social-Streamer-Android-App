@@ -137,7 +137,7 @@ public class ProfileUser extends AppCompatActivity implements View.OnClickListen
         switch(view.getId()){
             case R.id.FeedButton:
 
-//                startActivity(new Intent(this,Feed.class));
+                startActivity(new Intent(this,Feed.class).putExtra("user name", current_name));;
                 break;
             case R.id.FriendsButton:
                 /* send to 'Friends' activity list of users names and current user name by intent */
