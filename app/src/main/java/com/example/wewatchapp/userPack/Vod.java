@@ -444,7 +444,9 @@ public class Vod extends AppCompatActivity implements MovieItemClickListenerNew,
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot child : snapshot.getChildren()){
                     Views views = child.getValue(Views.class);
-                    if(views.getUserName().equals(userName)){
+
+                    /* check if username or the view (user name) are null */
+                    if(userName != null && views.getUserName() != null && views.getUserName().equals(userName)){
                         if(!al.contains(views.getMovieName())){
                             al.add(views.getMovieName());
                         }
