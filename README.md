@@ -59,3 +59,18 @@ WeWatch allows users to contact the content providers of the app and request the
 # For the Managers: 
 
 Administrators will be able to add new content for viewing to receive requests from users in the app and see their activity in the app.
+
+
+
+### Installation: 
+
+The installation can be done by making a clone legit for Android Studio. There you can burn the app to your mobile phone or Android device.
+
+Once installed on the device you will see the wewatch logo on the main screen! And this is where you are ready to enjoy the comfortable and enjoyable viewing experience of wewatch.
+
+### Registration to the app: 
+
+The application registration form must fill in all the marked fields and click on REGISTER. He will then send a registration confirmation email.
+
+(As long as you have not confirmed your consent to register for the app by logging in to the email sent to you, you will not be able to access the user or administrator page)
+
