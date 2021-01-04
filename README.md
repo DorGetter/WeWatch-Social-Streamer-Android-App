@@ -9,15 +9,15 @@
 
 # For the Users: 
 
-Imagine the following situation, you are sitting in the armchair after a long day with a glass of cold beer and hot popcorn opens the streamer hoping to find a good movie but you can not find the movie you want to see now .. The beer heats up The popcorn loses its crispiness and the whole viewing experience goes through About more and more movies that you are not sure are right for you ..
+Imagine the following situation, you are sitting in the armchair after a long day with a glass of cold beer and hot popcorn, you turn on the streamer hoping to find a good movie but you can not find the movie you want to see now .. The beer heats up, The popcorn loses its crispiness and the whole viewing experience goes through About more and more movies that you are not sure are right for you ..
 
-We at wewatch are coming to fix this unpleasant experience by combining your best friends to find the movie you would most like to see!
+ WeWatch is about making this unpleasant experience better, by letting your best friends find the movie you would like to see the most!
 
-wewatch is not just a streamer, while other streamers are based only on algorithms of matching movies to the user WeWatch brings your friends to your couch! With the help of the social network in the app you can see which movies your closest friends have seen and when they saw them so you can always be updated among the friends and find the right movie that the beer is cold and the popcorn is hot!
+WeWatch is not just a streaming service, while other streaming services are based only on algorithms of matching movies to the user, WeWatch brings your friends to your couch! With the help of the social network in the app you can see which movies your closest friends have seen and when they saw them so you can always be updated among the friends and find the right movie while the beer is cold and the popcorn is hot!
 
-On the app's home page you can find new members to see what they watched, your activity in the app, log in to the vod service, and request new content from the service providers (administrators) for new movies!
+On the app's home page you would find new members and their watch list, you would be able to watch movies through our VOD service, track your activity and request new content from the service providers (administrators) for new movies!
 
-Stream free movies and TV shows on youre android devices!
+Just stream free movies and TV shows on youre android devices!
 Watch movies from a selection of new titles, most popular, hidden gems that you may have missed as well as youre favorite geners like:
 * Action 
 * Adventure 
@@ -26,7 +26,7 @@ Watch movies from a selection of new titles, most popular, hidden gems that you 
 * My Movies
 
 
-WeWatch is using a realtime database which provides adding new content daily!
+WeWatch is using a realtime database that is being updated daily!
 WeWatch allows users to contact the content providers of the app and request the content they are missing for a perfect viewing experience!
 #
 #
@@ -66,11 +66,12 @@ Administrators will be able to add new content for viewing to receive requests f
 
 The installation can be done by making a clone legit for Android Studio. There you can burn the app to your mobile phone or Android device.
 
-Once installed on the device you will see the wewatch logo on the main screen! And this is where you are ready to enjoy the comfortable and enjoyable viewing experience of wewatch.
+Once installed on the device you will see the WeWatch logo on the main screen! 
+And now you can enjoy the comfort and joy that WeWatch experience provides.
 
 ### Registration to the app: 
 
-The application registration form must fill in all the marked fields and click on REGISTER. He will then send a registration confirmation email.
+The application registration form must be filled in all the marked fields, when they are filled - click Register. a confirmation mail will be sent to your mail.
 
 (As long as you have not confirmed your consent to register for the app by logging in to the email sent to you, you will not be able to access the user or administrator page)
 
