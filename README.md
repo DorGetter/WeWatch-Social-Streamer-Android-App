@@ -1,4 +1,4 @@
-######## ![ac_logo3](https://user-images.githubusercontent.com/57187365/103573314-b6192080-4ed6-11eb-956b-76d9cc4746b3.png)
+## ![ac_logo3](https://user-images.githubusercontent.com/57187365/103573314-b6192080-4ed6-11eb-956b-76d9cc4746b3.png)
 
 ##### Android OS Movie Streamer & social App
 
