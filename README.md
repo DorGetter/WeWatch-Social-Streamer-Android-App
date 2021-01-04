@@ -9,7 +9,7 @@
 
 # For the Users: 
 
-Imagine the following situation: you are sitting in the armchair after a long day with a glass of cold beer and a bowl of hot popcorn, you turn on the streamer hoping to find a good movie but you can not find the movie you want to see now .. The beer heats up, The popcorn loses its crispiness and the whole viewing experience goes through About more and more movies that you are not sure are right for you ..
+Imagine the following situation: you are sitting in the armchair after a long day with a glass of cold beer and a bowl of hot popcorn, you are turning the streamer on, hoping to find a good movie but you can not find the movie you want to see now .. The beer heats up, The popcorn loses its crispiness and the whole viewing experience goes through About more and more movies that you are not sure are right for you ..
 
  WeWatch is about making this unpleasant experience better, by letting your best friends find the movie you would like to see the most!
 
