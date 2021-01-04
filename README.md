@@ -1,19 +1,21 @@
-# ![ac_logo3](https://user-images.githubusercontent.com/57187365/103573314-b6192080-4ed6-11eb-956b-76d9cc4746b3.png)
+######## ![ac_logo3](https://user-images.githubusercontent.com/57187365/103573314-b6192080-4ed6-11eb-956b-76d9cc4746b3.png)
 
-#### Android OS Movie Streamer & social App
+##### Android OS Movie Streamer & social App
 
 #
 ![ezgif com-gif-maker](https://user-images.githubusercontent.com/57187365/103573136-6cc8d100-4ed6-11eb-94ba-cc6e8e4163dc.gif)
 
-## About the App
+### About the App
 
-# for the Users: 
+# For the Users: 
 
 Imagine the following situation, you are sitting in the armchair after a long day with a glass of cold beer and hot popcorn opens the streamer hoping to find a good movie but you can not find the movie you want to see now .. The beer heats up The popcorn loses its crispiness and the whole viewing experience goes through About more and more movies that you are not sure are right for you ..
 
 We at wewatch are coming to fix this unpleasant experience by combining your best friends to find the movie you would most like to see!
 
 wewatch is not just a streamer, while other streamers are based only on algorithms of matching movies to the user WeWatch brings your friends to your couch! With the help of the social network in the app you can see which movies your closest friends have seen and when they saw them so you can always be updated among the friends and find the right movie that the beer is cold and the popcorn is hot!
+
+On the app's home page you can find new members to see what they watched, your activity in the app, log in to the vod service, and request new content from the service providers (administrators) for new movies!
 
 Stream free movies and TV shows on youre android devices!
 Watch movies from a selection of new titles, most popular, hidden gems that you may have missed as well as youre favorite geners like:
@@ -22,6 +24,7 @@ Watch movies from a selection of new titles, most popular, hidden gems that you 
 * Comedy 
 * Romantic
 * My Movies
+
 
 WeWatch is using a realtime database which provides adding new content daily!
 WeWatch allows users to contact the content providers of the app and request the content they are missing for a perfect viewing experience!
@@ -51,3 +54,8 @@ WeWatch allows users to contact the content providers of the app and request the
 ## Friendly User Interface
 
 <img width="317" alt="profile" src="https://user-images.githubusercontent.com/57047863/101239745-c8931500-36f2-11eb-8053-7d8628575ea1.png">
+
+
+# For the Managers: 
+
+Administrators will be able to add new content for viewing to receive requests from users in the app and see their activity in the app.
