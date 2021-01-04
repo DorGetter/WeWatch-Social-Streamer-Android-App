@@ -1,6 +1,7 @@
 # WeWatch_App
-### Android OS Movies Player Application
+### Android OS Movie Streamer & social App
 #
+
 Stream free movies and TV shows on youre  android devices!
 Watch movies from a selection of new titles, most popular, hidden gems that you may have missed as well as youre favorite geners like:
 * Action 
